@@ -5,4 +5,9 @@ package com.example.han.gachafriends;
  */
 
 public class Summon {
+
+    public Summon ()
+    {
+
+    }
 }
