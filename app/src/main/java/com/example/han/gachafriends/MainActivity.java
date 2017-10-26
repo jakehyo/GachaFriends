@@ -16,16 +16,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         wireWidgets();
+        setOnClickListeners();
 
         android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
-        fm.beginTransaction().replace(R.id.fragment_container, new FragmentHome()).commit();
+        fm.beginTransaction().replace(R.id.fragment_container, new FragmentSummon()).commit();
+    }
+
+    private void setOnClickListeners() {
+        homeImageButton.setOnClickListener(this);
+        missionImageButton.setOnClickListener(this);
+        summonImageButton.setOnClickListener(this);
+        collectionImageButton.setOnClickListener(this);
     }
 
     private void wireWidgets() {
-        homeImageButton = (ImageButton) findViewById(R.id.imageButtonHome);
-        missionImageButton = (ImageButton) findViewById(R.id.imageButtonMission);
-        summonImageButton = (ImageButton) findViewById(R.id.imageButtonSummon);
-        collectionImageButton = (ImageButton) findViewById(R.id.imageButtonCollection);
+        homeImageButton = findViewById(R.id.imageButtonHome);
+        missionImageButton = findViewById(R.id.imageButtonMission);
+        summonImageButton = findViewById(R.id.imageButtonSummon);
+        collectionImageButton = findViewById(R.id.imageButtonCollection);
 
     }
 
