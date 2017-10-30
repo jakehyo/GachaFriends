@@ -2,14 +2,16 @@ package com.example.han.gachafriends;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ImageButton homeImageButton,missionImageButton,summonImageButton,collectionImageButton;
-
+    public static final String TAG = "TAGG";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 currentFragment = new FragmentMission();
                 break;
             case R.id.imageButtonSummon:
+                Summon xd = new Summon(this);
                 currentFragment = new FragmentSummon();
                 break;
             case R.id.imageButtonCollection:
@@ -58,10 +61,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         }
-        android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
+        FragmentManager fm = getSupportFragmentManager();
         if(currentFragment != null)
         {
             fm.beginTransaction().replace(R.id.fragment_container, currentFragment).commit();
         }
     }
+
+
 }
