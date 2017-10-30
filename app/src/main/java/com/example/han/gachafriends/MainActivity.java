@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
@@ -16,7 +15,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        /**BottomNavigationView bottomNavigationView = (BottomNavigationView)
+                findViewById(R.id.navigation);
 
+        bottomNavigationView.setOnNavigationItemSelectedListener
+                (new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        Fragment currentFragment = null;
+                        switch (item.getItemId()) {
+                            case R.id.imageButtonHome:
+                                currentFragment = new FragmentHome();
+                                break;
+                            case R.id.imageButtonMission:
+                                currentFragment = new FragmentMission();
+                                break;
+                            case R.id.imageButtonSummon:
+                                currentFragment = new FragmentSummon();
+                                break;
+                            case R.id.imageButtonCollection:
+                                currentFragment = new FragmentCollection();
+                                break;
+                            }
+                            return currentFragment;
+                        }
+*/
         wireWidgets();
         setOnClickListeners();
 
