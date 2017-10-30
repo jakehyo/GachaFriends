@@ -52,7 +52,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 currentFragment = new FragmentMission();
                 break;
             case R.id.imageButtonSummon:
-                Summon xd = new Summon(this);
                 currentFragment = new FragmentSummon();
                 break;
             case R.id.imageButtonCollection:

@@ -19,25 +19,34 @@ public class Summon {
 
     public Summon (Context context)
     {
-        setupText(context);
+        mContext = context;
+        setupText();
     }
 
-    private void setupText(Context context) {
+    private void setupText() {
         reader = new BufferedReader(new InputStreamReader(mContext.getResources().openRawResource(R.raw.names)));
     }
 
-    public String readLineNo(int lineNo) throws IOException {
+    public String readLineNo(int lineNo) {
         String givenLine = "";
         for(int i = 0; i < lineNo; i++){
-            givenLine = reader.readLine();
+            try {
+                givenLine = reader.readLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return givenLine;
     }
 
-    public int totalLines() throws IOException{
+    public int totalLines(){
         int i = 0;
-        while(reader.readLine() != null){
-            i++;
+        try {
+            while(reader.readLine() != null){
+                i++;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return i;
     }
