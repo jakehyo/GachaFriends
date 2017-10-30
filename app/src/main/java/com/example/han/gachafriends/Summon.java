@@ -1,11 +1,9 @@
 package com.example.han.gachafriends;
 
 import android.content.Context;
-import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 
 /**
@@ -49,5 +47,15 @@ public class Summon {
             e.printStackTrace();
         }
         return i;
+    }
+
+    public void summon()
+    {
+        int total = totalLines();
+        int friend = (int) (Math.random()*total);
+
+        Friend temp = new Friend(friend);
+        Collection.friends.add(temp);
+        //?????
     }
 }

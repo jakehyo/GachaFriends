@@ -11,11 +11,8 @@ public class Friend {
     private String name;
     private String desc;
 
-    public Friend(int id, int imgResourceId, String name, String desc) {
+    public Friend(int id) {
         this.id = id;
-        this.imgResourceId = imgResourceId;
-        this.name = name;
-        this.desc = desc;
     }
 
 }
