@@ -15,4 +15,9 @@ public class Friend {
         this.id = id;
     }
 
+    public void getImage()
+    {
+
+    }
+
 }
