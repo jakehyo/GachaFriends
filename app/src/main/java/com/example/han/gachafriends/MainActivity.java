@@ -1,35 +1,50 @@
 package com.example.han.gachafriends;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, BottomNavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ImageButton homeImageButton,missionImageButton,summonImageButton,collectionImageButton;
-    public TextView coinText;
-    public int coin = 5;
     public static final String TAG = "TAGG";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        /**BottomNavigationView bottomNavigationView = (BottomNavigationView)
+                findViewById(R.id.navigation);
 
+        bottomNavigationView.setOnNavigationItemSelectedListener
+                (new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        Fragment currentFragment = null;
+                        switch (item.getItemId()) {
+                            case R.id.imageButtonHome:
+                                currentFragment = new FragmentHome();
+                                break;
+                            case R.id.imageButtonMission:
+                                currentFragment = new FragmentMission();
+                                break;
+                            case R.id.imageButtonSummon:
+                                currentFragment = new FragmentSummon();
+                                break;
+                            case R.id.imageButtonCollection:
+                                currentFragment = new FragmentCollection();
+                                break;
+                            }
+                            return currentFragment;
+                        }
+*/
         wireWidgets();
         setOnClickListeners();
 
-
-        coinText.setText("Coins: "+ coin);
-
         android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
-        fm.beginTransaction().replace(R.id.fragment_container, new FragmentHome()).commit();
+        fm.beginTransaction().replace(R.id.fragment_container, new FragmentSummon()).commit();
     }
 
     private void setOnClickListeners() {
@@ -37,7 +52,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         missionImageButton.setOnClickListener(this);
         summonImageButton.setOnClickListener(this);
         collectionImageButton.setOnClickListener(this);
-
     }
 
     private void wireWidgets() {
@@ -45,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         missionImageButton = findViewById(R.id.imageButtonMission);
         summonImageButton = findViewById(R.id.imageButtonSummon);
         collectionImageButton = findViewById(R.id.imageButtonCollection);
-        coinText = findViewById(R.id.textViewCoin);
+
     }
 
     @Override
@@ -77,8 +91,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        return false;
-    }
 }

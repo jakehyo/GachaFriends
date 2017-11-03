@@ -1,5 +1,6 @@
 package com.example.han.gachafriends;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -7,6 +8,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 
 
 /**
@@ -58,6 +61,27 @@ public class FragmentMission extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+    }
+
+    @SuppressLint("SetTextI18n")
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState){
+        super.onViewCreated(view, savedInstanceState);
+        Button[] buttonArray = new Button[3];
+        LinearLayout layout = (LinearLayout) getView().findViewById(R.id.MissionLayout);
+        int[] buttonIds = new int[3];
+        for(int i = 0; i <= 2; i++) {
+            Button temp = new Button(getContext());
+            int id = View.generateViewId();
+            temp.setId(id);
+            temp.setText("Mission" + (i + 1));
+            buttonArray[i] = temp;
+            buttonIds[i] = id;
+            layout.addView(temp);
+        }
+
+
+
     }
 
     @Override
