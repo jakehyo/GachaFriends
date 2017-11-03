@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 
@@ -18,7 +19,7 @@ import android.widget.Toast;
  * Use the {@link FragmentSummon#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentSummon extends Fragment {
+public class FragmentSummon extends Fragment implements View.OnClickListener{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -28,6 +29,8 @@ public class FragmentSummon extends Fragment {
     private String mParam1;
     private String mParam2;
     private Context mContext;
+    private Button summonButton;
+    private Summon tempSummon;
 
     private OnFragmentInteractionListener mListener;
 
@@ -61,6 +64,14 @@ public class FragmentSummon extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
         mContext = getContext();
+        tempSummon = new Summon(mContext);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState){
+        super.onViewCreated(view, savedInstanceState);
+        summonButton = (Button) view.findViewById(R.id.SummonButton);
+        summonButton.setOnClickListener(this);
     }
 
     @Override
@@ -92,6 +103,11 @@ public class FragmentSummon extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onClick(View view) {
+        tempSummon.summon();
     }
 
     /**

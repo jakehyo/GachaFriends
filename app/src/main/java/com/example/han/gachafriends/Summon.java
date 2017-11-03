@@ -1,6 +1,8 @@
 package com.example.han.gachafriends;
 
 import android.content.Context;
+import android.util.Log;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -40,10 +42,12 @@ public class Summon {
     public void summon()
     {
         int total = totalLines();
-        int friend = (int) (Math.random()*total);
+        int friend = (int) (Math.random()*total + 1);
 
         Friend temp = new Friend(friend, mContext);
-        Collection.friends.add(temp);
+        Log.d(TAG, temp.getName());
+        Toast.makeText(mContext, temp.getName(), Toast.LENGTH_SHORT).show();
+        //Collection.friends.add(temp);
         //?????
     }
 }
