@@ -25,18 +25,6 @@ public class Summon {
         reader = new BufferedReader(new InputStreamReader(mContext.getResources().openRawResource(R.raw.names)));
     }
 
-    public String readLineNo(int lineNo) {
-        String givenLine = "";
-        for(int i = 0; i < lineNo; i++){
-            try {
-                givenLine = reader.readLine();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return givenLine;
-    }
-
     public int totalLines(){
         int i = 0;
         try {
@@ -54,7 +42,7 @@ public class Summon {
         int total = totalLines();
         int friend = (int) (Math.random()*total);
 
-        Friend temp = new Friend(friend);
+        Friend temp = new Friend(friend, mContext);
         Collection.friends.add(temp);
         //?????
     }

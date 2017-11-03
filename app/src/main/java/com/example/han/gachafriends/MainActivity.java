@@ -1,5 +1,6 @@
 package com.example.han.gachafriends;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -42,7 +43,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 */
         wireWidgets();
         setOnClickListeners();
-
         android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
         fm.beginTransaction().replace(R.id.fragment_container, new FragmentSummon()).commit();
     }
@@ -80,12 +80,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.imageButtonCollection:
                 currentFragment = new FragmentCollection();
                 break;
-
-
         }
         FragmentManager fm = getSupportFragmentManager();
-        if(currentFragment != null)
-        {
+        if(currentFragment != null) {
             fm.beginTransaction().replace(R.id.fragment_container, currentFragment).commit();
         }
     }
