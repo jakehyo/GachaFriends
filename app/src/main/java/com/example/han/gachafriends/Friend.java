@@ -48,4 +48,10 @@ public class Friend {
     public String getName() {
         return name;
     }
+
+    public int getImageId(){
+        String imageName = "@drawable/" + name.toLowerCase();
+        return mContext.getResources().getIdentifier(imageName, "drawable", mContext.getPackageName());
+    }
+
 }

@@ -2,6 +2,8 @@ package com.example.han.gachafriends;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -14,8 +16,9 @@ import java.io.InputStreamReader;
 
 public class Summon {
     public static final String TAG = "Tagg";
-    public Context mContext;
-    public BufferedReader reader;
+    private Context mContext;
+    private BufferedReader nameReader;
+    private ImageView image;
 
     public Summon (Context context)
     {
@@ -24,13 +27,14 @@ public class Summon {
     }
 
     private void setupText() {
-        reader = new BufferedReader(new InputStreamReader(mContext.getResources().openRawResource(R.raw.names)));
+        nameReader = new BufferedReader(new InputStreamReader(mContext.getResources().openRawResource(R.raw.names)));
     }
 
     public int totalLines(){
+        setupText();
         int i = 0;
         try {
-            while(reader.readLine() != null){
+            while(nameReader.readLine() != null){
                 i++;
             }
         } catch (IOException e) {
@@ -39,14 +43,15 @@ public class Summon {
         return i;
     }
 
-    public void summon()
+    public Friend summon()
     {
+        setupText();
         int total = totalLines();
         int friend = (int) (Math.random()*total + 1);
-
         Friend temp = new Friend(friend, mContext);
         Log.d(TAG, temp.getName());
         Toast.makeText(mContext, temp.getName(), Toast.LENGTH_SHORT).show();
+        return temp;
         //Collection.friends.add(temp);
         //?????
     }
