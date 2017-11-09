@@ -5,6 +5,7 @@ import android.content.Context;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.Buffer;
 
 /**
  * Created by per6 on 10/20/17.
@@ -42,15 +43,22 @@ public class Friend {
         return givenLine;
     }
 
-    //Comment by Jeffrey: Should the readLine methods and setupText method be put into a separate class for the sake of convention?
-
-
     public String getName() {
         return name;
     }
 
     public int getImageId(){
-        String imageName = "@drawable/" + name.toLowerCase();
+        String nameWithUnderscores = "";
+        for(int i = 0; i < name.length(); i++){
+            String tempLetter = "";
+            if(name.substring(i, i+1).equals(" ")){
+                tempLetter = "_";
+            } else {
+                tempLetter = name.substring(i, i+1);
+            }
+            nameWithUnderscores = nameWithUnderscores + tempLetter;
+        }
+        String imageName = "@drawable/" + nameWithUnderscores.toLowerCase();
         return mContext.getResources().getIdentifier(imageName, "drawable", mContext.getPackageName());
     }
 
