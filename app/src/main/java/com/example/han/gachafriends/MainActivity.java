@@ -1,5 +1,7 @@
 package com.example.han.gachafriends;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -11,45 +13,32 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ImageButton homeImageButton,missionImageButton,summonImageButton,collectionImageButton;
-    public TextView coinText;
-    public int coin = 5;
+    private TextView coinText;
+    private int coin = 5;
     public static final String TAG = "TAGG";
+    private Collection collection;
+    private SharedPreferences sharedPref;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        /**BottomNavigationView bottomNavigationView = (BottomNavigationView)
-                findViewById(R.id.navigation);
 
-        bottomNavigationView.setOnNavigationItemSelectedListener
-                (new BottomNavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        Fragment currentFragment = null;
-                        switch (item.getItemId()) {
-                            case R.id.imageButtonHome:
-                                currentFragment = new FragmentHome();
-                                break;
-                            case R.id.imageButtonMission:
-                                currentFragment = new FragmentMission();
-                                break;
-                            case R.id.imageButtonSummon:
-                                currentFragment = new FragmentSummon();
-                                break;
-                            case R.id.imageButtonCollection:
-                                currentFragment = new FragmentCollection();
-                                break;
-                            }
-                            return currentFragment;
-                        }
-*/
         wireWidgets();
         setOnClickListeners();
 
         coinText.setText("Coins: "+ coin);
 
+        // Make the hashset to array conversion a method
+
+        collection = new Collection();
+        sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+
+
         android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
         fm.beginTransaction().replace(R.id.fragment_container, new FragmentSummon()).commit();
+
+        //pull the collection ids from shared prefs and instantiate the collection (or maybe in onResume)
     }
 
     private void setOnClickListeners() {
@@ -96,5 +85,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    //override onPause to save to sharedpreferences whatever is in the collection
 
 }

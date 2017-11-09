@@ -2,7 +2,6 @@ package com.example.han.gachafriends;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -51,6 +50,7 @@ public class Summon {
         Friend temp = new Friend(friend, mContext);
         Log.d(TAG, temp.getName());
         Toast.makeText(mContext, temp.getName(), Toast.LENGTH_SHORT).show();
+        
         return temp;
         //Collection.friends.add(temp);
         //?????

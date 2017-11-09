@@ -5,7 +5,6 @@ import android.content.Context;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.nio.Buffer;
 
 /**
  * Created by per6 on 10/20/17.
@@ -14,7 +13,6 @@ import java.nio.Buffer;
 public class Friend {
 
     private int id;
-    private int imgResourceId;
     private String name;
     private String desc;
     private Context mContext;
@@ -43,6 +41,8 @@ public class Friend {
         }
         return givenLine;
     }
+
+    //Comment by Jeffrey: Should the readLine methods and setupText method be put into a separate class for the sake of convention?
 
 
     public String getName() {
