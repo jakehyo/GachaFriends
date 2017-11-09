@@ -14,7 +14,6 @@ import java.nio.Buffer;
 public class Friend {
 
     private int id;
-    private int imgResourceId;
     private String name;
     private String desc;
     private Context mContext;
@@ -44,13 +43,22 @@ public class Friend {
         return givenLine;
     }
 
-
     public String getName() {
         return name;
     }
 
     public int getImageId(){
-        String imageName = "@drawable/" + name.toLowerCase();
+        String nameWithUnderscores = "";
+        for(int i = 0; i < name.length(); i++){
+            String tempLetter = "";
+            if(name.substring(i, i+1).equals(" ")){
+                tempLetter = "_";
+            } else {
+                tempLetter = name.substring(i, i+1);
+            }
+            nameWithUnderscores = nameWithUnderscores + tempLetter;
+        }
+        String imageName = "@drawable/" + nameWithUnderscores.toLowerCase();
         return mContext.getResources().getIdentifier(imageName, "drawable", mContext.getPackageName());
     }
 
