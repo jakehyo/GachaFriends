@@ -1,17 +1,15 @@
 package com.example.han.gachafriends;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.TextView;
 
 
 /**
@@ -35,6 +33,7 @@ public class FragmentSummon extends Fragment implements View.OnClickListener{
     private Button summonButton;
     private Summon tempSummon;
     private ImageView image;
+    private TextView name;
     private OnFragmentInteractionListener mListener;
     private final String TAG = "TAGG";
 
@@ -77,6 +76,7 @@ public class FragmentSummon extends Fragment implements View.OnClickListener{
         summonButton = (Button) view.findViewById(R.id.SummonButton);
         summonButton.setOnClickListener(this);
         image = (ImageView) view.findViewById(R.id.imageViewTemp);
+        name = view.findViewById(R.id.textViewName);
     }
 
     @Override
@@ -114,6 +114,7 @@ public class FragmentSummon extends Fragment implements View.OnClickListener{
     public void onClick(View view) {
         Friend tempFriend = tempSummon.summon();
         image.setImageResource(tempFriend.getImageId());
+        name.setText(tempSummon.getName());
     }
 
     /**

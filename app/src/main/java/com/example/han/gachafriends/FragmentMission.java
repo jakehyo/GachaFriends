@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 
 
 /**
@@ -29,7 +28,7 @@ public class FragmentMission extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    private Button m1Button, m2Button, m3Button, m4Button, m5Button;
     private OnFragmentInteractionListener mListener;
 
     public FragmentMission() {
@@ -57,14 +56,33 @@ public class FragmentMission extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+           // wireWidgets();
+            setOnClickListeners();
         }
     }
 
+
+    private void setOnClickListeners() {
+        m1Button.setOnClickListener((View.OnClickListener) this);
+        m2Button.setOnClickListener((View.OnClickListener) this);
+        m3Button.setOnClickListener((View.OnClickListener) this);
+        m4Button.setOnClickListener((View.OnClickListener) this);
+        m5Button.setOnClickListener((View.OnClickListener) this);
+    }
+    /**private void wireWidgets() {
+        m1Button = findViewById(R.id.buttonM1);
+        m2Button = findViewById(R.id.buttonM2);
+        m3Button = findViewById(R.id.buttonM3);
+        m4Button = findViewById(R.id.buttonM4);
+        m5Button = findViewById(R.id.buttonM5);
+    }*/
+
     @SuppressLint("SetTextI18n")
-    @Override
+    /**@Override
     public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
         Button[] buttonArray = new Button[3];
@@ -83,7 +101,7 @@ public class FragmentMission extends Fragment {
 
 
     }
-
+*/
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -95,6 +113,7 @@ public class FragmentMission extends Fragment {
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
+
         }
     }
 
