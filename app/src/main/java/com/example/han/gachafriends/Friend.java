@@ -43,6 +43,18 @@ public class Friend {
         return givenLine;
     }
 
+    public int totalLines(){
+        int i = 0;
+        try {
+            while(nameReader.readLine() != null){
+                i++;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return i;
+    }
+
     public String getName() {
         return name;
     }

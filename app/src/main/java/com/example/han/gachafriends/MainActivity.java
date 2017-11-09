@@ -1,24 +1,31 @@
 package com.example.han.gachafriends;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity{
 
     private ImageButton homeImageButton,missionImageButton,summonImageButton,collectionImageButton;
     public TextView coinText;
     public int coin = 5;
     public static final String TAG = "TAGG";
+    private TextView mTextMessage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        /**BottomNavigationView bottomNavigationView = (BottomNavigationView)
+        mTextMessage = (TextView) findViewById(R.id.message);
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        /*BottomNavigationView bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.navigation);
 
         bottomNavigationView.setOnNavigationItemSelectedListener
@@ -42,59 +49,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             }
                             return currentFragment;
                         }
-*/
-        wireWidgets();
-        setOnClickListeners();
+*/      wireWidgets();
 
         coinText.setText("Coins: "+ coin);
-
-        android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
-        fm.beginTransaction().replace(R.id.fragment_container, new FragmentSummon()).commit();
-    }
-
-    private void setOnClickListeners() {
-        homeImageButton.setOnClickListener(this);
-        missionImageButton.setOnClickListener(this);
-        summonImageButton.setOnClickListener(this);
-        collectionImageButton.setOnClickListener(this);
     }
 
     private void wireWidgets() {
-        homeImageButton = findViewById(R.id.imageButtonHome);
-        missionImageButton = findViewById(R.id.imageButtonMission);
-        summonImageButton = findViewById(R.id.imageButtonSummon);
-        collectionImageButton = findViewById(R.id.imageButtonCollection);
-        coinText = findViewById(R.id.textView);
-
+        coinText = (TextView) findViewById(R.id.coin_text);
     }
 
-    @Override
-    public void onClick(View view) {
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
-        Fragment currentFragment = null;
-
-        switch (view.getId()) {
-            case R.id.imageButtonHome:
-                currentFragment = new FragmentHome();
-                break;
-            case R.id.imageButtonMission:
-                currentFragment = new FragmentMission();
-                break;
-            case R.id.imageButtonSummon:
-                currentFragment = new FragmentSummon();
-                break;
-            case R.id.imageButtonCollection:
-                currentFragment = new FragmentCollection();
-                break;
-
-
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            Fragment currentFragment = null;
+            switch (item.getItemId()) {
+                case R.id.navigation_home:
+                    currentFragment = new FragmentHome();
+                    break;
+                case R.id.navigation_dashboard:
+                    currentFragment = new FragmentCollection();
+                    break;
+                case R.id.navigation_notifications:
+                    currentFragment = new FragmentSummon();
+                    break;
+            }
+            FragmentManager fm = getSupportFragmentManager();
+            if(currentFragment != null){
+                fm.beginTransaction().replace(R.id.fragment_container, currentFragment).commit();
+            }
+            return true;
         }
-        FragmentManager fm = getSupportFragmentManager();
-        if(currentFragment != null)
-        {
-            fm.beginTransaction().replace(R.id.fragment_container, currentFragment).commit();
-        }
-    }
-
-
+    };
 }
