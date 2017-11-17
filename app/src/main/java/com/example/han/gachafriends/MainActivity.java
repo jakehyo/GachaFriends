@@ -10,6 +10,9 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ImageButton homeImageButton,missionImageButton,summonImageButton,collectionImageButton;
@@ -29,11 +32,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         coinText.setText("Coins: "+ coin);
 
-        // Make the hashset to array conversion a method
+        // Set up SharedPreference storage
 
         collection = new Collection();
         sharedPref = this.getPreferences(Context.MODE_PRIVATE);
-
+        Set<String> temp = sharedPref.getStringSet("key",new HashSet<String>());
+        collection.setCollection(collection.convertSetToArray(temp));
 
         android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
         fm.beginTransaction().replace(R.id.fragment_container, new FragmentSummon()).commit();
@@ -88,6 +92,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onPause() {
         super.onPause();
+
+
+
 
     }
 
