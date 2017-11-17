@@ -23,33 +23,9 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mTextMessage = (TextView) findViewById(R.id.message);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        /*BottomNavigationView bottomNavigationView = (BottomNavigationView)
-                findViewById(R.id.navigation);
-
-        bottomNavigationView.setOnNavigationItemSelectedListener
-                (new BottomNavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        Fragment currentFragment = null;
-                        switch (item.getItemId()) {
-                            case R.id.imageButtonHome:
-                                currentFragment = new FragmentHome();
-                                break;
-                            case R.id.imageButtonMission:
-                                currentFragment = new FragmentMission();
-                                break;
-                            case R.id.imageButtonSummon:
-                                currentFragment = new FragmentSummon();
-                                break;
-                            case R.id.imageButtonCollection:
-                                currentFragment = new FragmentCollection();
-                                break;
-                            }
-                            return currentFragment;
-                        }
-*/      wireWidgets();
+        wireWidgets();
 
         coinText.setText("Coins: "+ coin);
     }
@@ -68,12 +44,14 @@ public class MainActivity extends AppCompatActivity{
                 case R.id.navigation_home:
                     currentFragment = new FragmentHome();
                     break;
-                case R.id.navigation_dashboard:
+                case R.id.navigation_collection:
                     currentFragment = new FragmentCollection();
                     break;
-                case R.id.navigation_notifications:
+                case R.id.navigation_summon:
                     currentFragment = new FragmentSummon();
                     break;
+                case R.id.navigation_mission:
+                    currentFragment = new FragmentMission();
             }
             FragmentManager fm = getSupportFragmentManager();
             if(currentFragment != null){

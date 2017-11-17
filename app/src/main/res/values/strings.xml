@@ -2,13 +2,13 @@
     <string name="app_name">GachaFriends</string>
     <string name="home">Home</string>
     <string name="collection">Collection</string>
-    <string name="summon">Summon</string>
-    <string name="mission">Mission</string>
     <string name="collection_key">list of collection</string>
     <string name="title_activity_temp">temp</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_collection">Collection</string>
     <string name="title_notifications">Notifications</string>
+    <string name="summon">Summon</string>
+    <string name="mission">Mission</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 
