@@ -38,6 +38,7 @@ public class Collection {
         }
         Set<String> ids = new HashSet<String>(Arrays.asList(temp2));
         return ids;
+        //magic
     }
 
     public int[] getCollection() {
