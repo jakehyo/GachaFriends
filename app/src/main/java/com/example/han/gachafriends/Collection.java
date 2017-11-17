@@ -1,22 +1,28 @@
 package com.example.han.gachafriends;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by per6 on 10/20/17.
  */
 
 public class Collection {
-    public static List<Friend> friends;
+
+    private int[] collection;
 
     public Collection()
     {
-        friends = new ArrayList<>();
+
+
     }
 
-    public void addFriend(Friend friend)
+    public Set<String> convertSettoArray(int[] collection)
     {
-        friends.add(friend);
+        //Needs implementation
+
+        Set<String> temp = new HashSet<String>();
+        return temp;
+        //:L
     }
 }
