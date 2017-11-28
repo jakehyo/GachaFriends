@@ -13,7 +13,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity{
 
     private ImageButton homeImageButton,missionImageButton,summonImageButton,collectionImageButton;
     public TextView coinText;
@@ -33,9 +33,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
 
         wireWidgets();
-        setOnClickListeners();
-
-        coinText.setText("Coins: "+ coin);
 
         // Make the hashset to array conversion a method
 
@@ -47,13 +44,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fm.beginTransaction().replace(R.id.fragment_container, new FragmentSummon()).commit();
 
         //pull the collection ids from shared prefs and instantiate the collection (or maybe in onResume)
-    }
-
-    private void setOnClickListeners() {
-        homeImageButton.setOnClickListener(this);
-        missionImageButton.setOnClickListener(this);
-        summonImageButton.setOnClickListener(this);
-        collectionImageButton.setOnClickListener(this);
     }
 
     private void wireWidgets() {
@@ -70,11 +60,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 case R.id.navigation_home:
                     currentFragment = new FragmentHome();
                     break;
-                case R.id.navigation_dashboard:
+                case R.id.navigation_collection:
                     currentFragment = new FragmentCollection();
                     break;
-                case R.id.navigation_notifications:
+                case R.id.navigation_summon:
                     currentFragment = new FragmentSummon();
+                    break;
+                case R.id.navigation_mission:
+                    currentFragment = new FragmentMission();
                     break;
             }
             FragmentManager fm = getSupportFragmentManager();

@@ -9,6 +9,9 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="title_collection">Collection</string>
+    <string name="title_mission">Mission</string>
+    <string name="title_summon">Summon</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 
