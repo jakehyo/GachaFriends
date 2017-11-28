@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity{
 
 
         android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
-        fm.beginTransaction().replace(R.id.fragment_container, new FragmentSummon()).commit();
+        fm.beginTransaction().replace(R.id.fragment_container, new FragmentHome()).commit();
 
         //pull the collection ids from shared prefs and instantiate the collection (or maybe in onResume)
     }
