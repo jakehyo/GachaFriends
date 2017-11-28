@@ -1,5 +1,7 @@
 package com.example.han.gachafriends;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -13,22 +15,38 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity{
 
-    private ImageButton homeImageButton,missionImageButton,summonImageButton,collectionImageButton;
+
     public TextView coinText;
     public int coin = 5;
     public static final String TAG = "TAGG";
     private TextView mTextMessage;
+    private Collection collection;
+    private SharedPreferences sharedPref;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mTextMessage = (TextView) findViewById(R.id.message);
-        BottomNavigationView navigation = findViewById(R.id.navigation);
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
         wireWidgets();
 
         coinText.setText("Coins: "+ coin);
+
+        // Make the hashset to array conversion a method
+
+        collection = new Collection();
+        sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+
+
+        android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
+        fm.beginTransaction().replace(R.id.fragment_container, new FragmentSummon()).commit();
+
+        //pull the collection ids from shared prefs and instantiate the collection (or maybe in onResume)
     }
+
 
     private void wireWidgets() {
         coinText = (TextView) findViewById(R.id.coin_text);
@@ -44,14 +62,12 @@ public class MainActivity extends AppCompatActivity{
                 case R.id.navigation_home:
                     currentFragment = new FragmentHome();
                     break;
-                case R.id.navigation_collection:
+                case R.id.navigation_dashboard:
                     currentFragment = new FragmentCollection();
                     break;
-                case R.id.navigation_summon:
+                case R.id.navigation_notifications:
                     currentFragment = new FragmentSummon();
                     break;
-                case R.id.navigation_mission:
-                    currentFragment = new FragmentMission();
             }
             FragmentManager fm = getSupportFragmentManager();
             if(currentFragment != null){
