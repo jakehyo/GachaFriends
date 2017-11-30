@@ -51,6 +51,7 @@ public class Summon {
         temp = new Friend(friend, mContext);
         Log.d(TAG, temp.getName());
         Toast.makeText(mContext, temp.getName(), Toast.LENGTH_SHORT).show();
+
         return temp;
         //Collection.friends.add(temp);
         //?????

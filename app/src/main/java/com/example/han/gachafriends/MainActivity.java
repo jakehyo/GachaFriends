@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity{
 
-
+    private ImageButton homeImageButton,missionImageButton,summonImageButton,collectionImageButton;
     public TextView coinText;
     public int coin = 5;
     public static final String TAG = "TAGG";
@@ -30,6 +30,10 @@ public class MainActivity extends AppCompatActivity{
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        mTextMessage = (TextView) findViewById(R.id.message);
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
 
         wireWidgets();
 
@@ -42,7 +46,7 @@ public class MainActivity extends AppCompatActivity{
 
 
         android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
-        fm.beginTransaction().replace(R.id.fragment_container, new FragmentSummon()).commit();
+        fm.beginTransaction().replace(R.id.fragment_container, new FragmentHome()).commit();
 
         //pull the collection ids from shared prefs and instantiate the collection (or maybe in onResume)
     }
