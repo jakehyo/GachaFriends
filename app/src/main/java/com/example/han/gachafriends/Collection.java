@@ -13,8 +13,13 @@ public class Collection {
 
     public Collection()
     {
+        collection = new int[2];
+        collection[0] = 3;
+        collection[1] = 4;
+    }
 
-
+    public int[] getCollection(){
+        return collection;
     }
 
     public Set<String> convertSettoArray(int[] collection)

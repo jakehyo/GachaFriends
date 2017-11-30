@@ -62,11 +62,14 @@ public class MainActivity extends AppCompatActivity{
                 case R.id.navigation_home:
                     currentFragment = new FragmentHome();
                     break;
-                case R.id.navigation_dashboard:
+                case R.id.navigation_collection:
                     currentFragment = new FragmentCollection();
                     break;
-                case R.id.navigation_notifications:
+                case R.id.navigation_summon:
                     currentFragment = new FragmentSummon();
+                    break;
+                case R.id.navigation_mission:
+                    currentFragment = new FragmentMission();
                     break;
             }
             FragmentManager fm = getSupportFragmentManager();

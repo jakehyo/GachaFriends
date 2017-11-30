@@ -2,12 +2,15 @@ package com.example.han.gachafriends;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.Set;
@@ -32,6 +35,9 @@ public class FragmentCollection extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    private LinearLayout linearLayout;
+    private Collection collection;
 
     public FragmentCollection() {
         // Required empty public constructor
@@ -61,6 +67,26 @@ public class FragmentCollection extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+        }
+        collection = new Collection();
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState){
+        super.onViewCreated(view, savedInstanceState);
+        linearLayout = getView().findViewById(R.id.collection_layout);
+        int[] tempCollection = collection.getCollection();
+
+
+
+        for(int i : tempCollection){
+            Button tempButton = new Button(getContext());
+            Friend tempFriend = new Friend(i, getContext());
+            Drawable tempimg = getContext().getResources().getDrawable(tempFriend.getImageId());
+            tempimg.setBounds(0,0,60,60);
+            tempButton.setText(tempFriend.getName());
+            tempButton.setCompoundDrawables(tempimg, null, null, null);
+            linearLayout.addView(tempButton);
         }
     }
 

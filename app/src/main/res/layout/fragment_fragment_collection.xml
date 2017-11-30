@@ -5,9 +5,12 @@
     tools:context="com.example.han.gachafriends.FragmentCollection">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <LinearLayout
+        android:id="@+id/collection_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/collection" />
+        android:orientation="vertical">
 
+    </LinearLayout>
 </FrameLayout>
