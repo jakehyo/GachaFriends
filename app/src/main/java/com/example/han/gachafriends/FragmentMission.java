@@ -1,6 +1,5 @@
 package com.example.han.gachafriends;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,17 +18,19 @@ import android.widget.Button;
  * Use the {@link FragmentMission#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentMission extends Fragment {
+public class FragmentMission extends Fragment implements View.OnClickListener{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    public static final String TAG = "TAGG";
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
     private Button m1Button, m2Button, m3Button, m4Button, m5Button;
     private OnFragmentInteractionListener mListener;
+
 
     public FragmentMission() {
         // Required empty public constructor
@@ -60,29 +61,38 @@ public class FragmentMission extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
-           // wireWidgets();
-            setOnClickListeners();
         }
     }
 
 
     private void setOnClickListeners() {
-        m1Button.setOnClickListener((View.OnClickListener) this);
-        m2Button.setOnClickListener((View.OnClickListener) this);
-        m3Button.setOnClickListener((View.OnClickListener) this);
-        m4Button.setOnClickListener((View.OnClickListener) this);
-        m5Button.setOnClickListener((View.OnClickListener) this);
+        m1Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity.addCoin();
+            }
+        });
+        m2Button.setOnClickListener(this);
+        m3Button.setOnClickListener(this);
+        m4Button.setOnClickListener(this);
+        m5Button.setOnClickListener(this);
     }
-    /**private void wireWidgets() {
-        m1Button = findViewById(R.id.buttonM1);
-        m2Button = findViewById(R.id.buttonM2);
-        m3Button = findViewById(R.id.buttonM3);
-        m4Button = findViewById(R.id.buttonM4);
-        m5Button = findViewById(R.id.buttonM5);
-    }*/
+        @Override
+        public void onViewCreated(View view, Bundle savedInstanceState){
+            super.onViewCreated(view, savedInstanceState);
 
-    @SuppressLint("SetTextI18n")
-    /**@Override
+            m1Button = view.findViewById(R.id.buttonM1);
+            m2Button = view.findViewById(R.id.buttonM2);
+            m3Button = view.findViewById(R.id.buttonM3);
+            m4Button = view.findViewById(R.id.buttonM4);
+            m5Button = view.findViewById(R.id.buttonM5);
+            setOnClickListeners();
+        }
+
+
+
+    /**@SuppressLint("SetTextI18n")
+    @Override
     public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
         Button[] buttonArray = new Button[3];
@@ -134,6 +144,40 @@ public class FragmentMission extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.buttonM1:
+            MainActivity.addCoin();
+            break;
+            case R.id.buttonM2:
+             MainActivity.addCoin();
+             MainActivity.addCoin();
+             break;
+             case R.id.buttonM3:
+             MainActivity.addCoin();
+             MainActivity.addCoin();
+             MainActivity.addCoin();
+             break;
+             case R.id.buttonM4:
+             MainActivity.addCoin();
+             MainActivity.addCoin();
+             MainActivity.addCoin();
+             MainActivity.addCoin();
+             break;
+             case R.id.buttonM5:
+             MainActivity.addCoin();
+             MainActivity.addCoin();
+             MainActivity.addCoin();
+             MainActivity.addCoin();
+             MainActivity.addCoin();
+             break;
+             }
+        }
+
+
+
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -148,4 +192,11 @@ public class FragmentMission extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+    /**public int getCoin() {
+        return coin;
+    }
+    public void setCoin(int coin) {
+        this.coin = coin;
+    }**/
 }
+

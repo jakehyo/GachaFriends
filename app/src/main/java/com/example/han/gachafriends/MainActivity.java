@@ -10,9 +10,9 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private static int coin;
     private ImageButton homeImageButton,missionImageButton,summonImageButton,collectionImageButton;
-    public TextView coinText;
-    public int coin = 5;
+    public static TextView coinText;
     public static final String TAG = "TAGG";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         coinText.setText("Coins: "+ coin);
 
-        android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
+        FragmentManager fm = getSupportFragmentManager();
         fm.beginTransaction().replace(R.id.fragment_container, new FragmentSummon()).commit();
     }
 
@@ -57,6 +57,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         missionImageButton.setOnClickListener(this);
         summonImageButton.setOnClickListener(this);
         collectionImageButton.setOnClickListener(this);
+
+    }
+
+    public static void addCoin(){
+        coinText.setText("Coins: "+ ++coin);
+    }
+    public static int getCoin() { return coin;}
+    public static void setCoin() { coinText.setText("Coins: "+ (coin - 5));
+        coin = coin-5;}
+    public static void resetCoin(){
+        coin = 0;
+        coinText.setText("Coins: "+ coin);
     }
 
     private void wireWidgets() {

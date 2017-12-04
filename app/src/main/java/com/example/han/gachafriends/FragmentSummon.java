@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -112,10 +113,18 @@ public class FragmentSummon extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
-        Friend tempFriend = tempSummon.summon();
-        image.setImageResource(tempFriend.getImageId());
-        name.setText(tempSummon.getName());
-    }
+        if (MainActivity.getCoin() >= 5) {
+            Friend tempFriend = tempSummon.summon();
+            image.setImageResource(tempFriend.getImageId());
+            name.setText(tempSummon.getName());
+            MainActivity.setCoin();
+            Log.d(TAG, "onClick: ");
+        }
+       else if(MainActivity.getCoin() <= 5) {
+
+        }
+        }
+
 
     /**
      * This interface must be implemented by activities that contain this
