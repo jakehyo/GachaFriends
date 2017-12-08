@@ -11,7 +11,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -40,8 +43,9 @@ public class FragmentCollection extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    private LinearLayout linearLayout;
+    private GridView gridView;
     private Collection collection;
+    private ArrayAdapter<Friend> friendArrayAdapter;
 
     public FragmentCollection() {
         // Required empty public constructor
@@ -73,7 +77,16 @@ public class FragmentCollection extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
         collection = new Collection();
-        new AsyncCreation().execute(collection);
+    }
+
+    private void setupGridView() {
+       friendArrayAdapter = new ArrayAdapter<Friend>(getContext(), android.R.layout.simple_list_item_1,collection.getFriendList(getContext()));
+       gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+           @Override
+           public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+           }
+       });
     }
 
     @Override
@@ -81,6 +94,14 @@ public class FragmentCollection extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_fragment_collection, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState){
+        super.onViewCreated(view, savedInstanceState);
+        gridView = getView().findViewById(R.id.collection_view);
+        setupGridView();
+        gridView.setAdapter(friendArrayAdapter);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -122,38 +143,5 @@ public class FragmentCollection extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    private class AsyncCreation extends AsyncTask<Collection, Void, ArrayList<Button>> {
 
-
-        @Override
-        protected ArrayList<Button> doInBackground(Collection... collections) {
-            int[] tempCollection = collections[0].getCollection();
-            ArrayList<Button> buttonContainer = new ArrayList<>();
-
-
-            for(int i : tempCollection){
-                Button tempButton = new Button(getContext());
-                Friend tempFriend = new Friend(i, getContext());
-                Drawable tempimg = getContext().getResources().getDrawable(tempFriend.getImageId());
-                tempimg.setBounds(0,0,60,60);
-
-                tempButton.setCompoundDrawables(tempimg, null, null, null);
-                tempButton.setText(tempFriend.getName());
-                buttonContainer.add(tempButton);
-                Log.d(MainActivity.TAG, "doInBackground: Added a new Button");
-            }
-            return buttonContainer;
-        }
-
-        @Override
-        protected void onPostExecute(ArrayList<Button> buttons) {
-            super.onPostExecute(buttons);
-            LinearLayout linearLayout = getView().findViewById(R.id.collection_layout);
-            Log.d(MainActivity.TAG, "onPostExecute: Added Buttons");
-            for(Button i : buttons){
-                linearLayout.addView(i);
-            }
-        }
-
-    }
 }

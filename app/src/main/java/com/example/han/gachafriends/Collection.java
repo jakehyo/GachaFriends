@@ -1,5 +1,8 @@
 package com.example.han.gachafriends;
 
+import android.content.Context;
+
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,6 +23,14 @@ public class Collection {
 
     public int[] getCollection(){
         return collection;
+    }
+
+    public ArrayList<Friend> getFriendList(Context context){
+        ArrayList<Friend> friendArrayList = new ArrayList<>();
+        for(int friendID : collection){
+            friendArrayList.add(new Friend(friendID, context));
+        }
+        return friendArrayList;
     }
 
     public Set<String> convertSettoArray(int[] collection)

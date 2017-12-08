@@ -74,4 +74,8 @@ public class Friend {
         return mContext.getResources().getIdentifier(imageName, "drawable", mContext.getPackageName());
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
 }
