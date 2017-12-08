@@ -14,8 +14,7 @@ public class Collection {
 
     public Collection()
     {
-
-
+        this.collection = new int[]{0,1,2};
     }
 
     public int[] convertSetToArray(Set<String> temp)
@@ -41,6 +40,11 @@ public class Collection {
         //magic
     }
 
+    public void addCoin(int i)
+    {
+        collection[0]+=i;
+    }
+
     public int[] getCollection() {
         return collection;
     }
@@ -48,4 +52,8 @@ public class Collection {
     public void setCollection(int[] collection) {
         this.collection = collection;
     }
+
+
+
+
 }
