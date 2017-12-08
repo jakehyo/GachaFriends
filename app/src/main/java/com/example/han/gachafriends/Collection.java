@@ -11,6 +11,7 @@ import java.util.Set;
 public class Collection {
 
     private int[] collection;
+    private int coin;
 
     public Collection()
     {
@@ -40,9 +41,18 @@ public class Collection {
         //magic
     }
 
+    public int getCoin() {
+        return coin;
+    }
+
+    public void setCoin(int coin) {
+        this.coin = coin;
+    }
+
     public void addCoin(int i)
     {
-        collection[0]+=i;
+        coin +=i;
+
     }
 
     public int[] getCollection() {

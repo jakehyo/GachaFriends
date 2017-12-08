@@ -40,9 +40,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         sharedPref = this.getPreferences(Context.MODE_PRIVATE);
         collection = new Collection();
 
-        int[] buffer = collection.convertSetToArray(sharedPref.getStringSet(getString(R.string.collection_key),emptySet));
-        Log.d(TAG, "onCreate: start 2    :" + buffer.length);
-        collection.setCollection(buffer);
+        int[] bufferSet = collection.convertSetToArray(sharedPref.getStringSet(getString(R.string.collection_key),emptySet));
+        int bufferCoin = sharedPref.getInt(getString(R.string.coin_key), 0);
+        collection.setCoin(bufferCoin);
+        collection.setCollection(bufferSet);
 
 
 
@@ -103,14 +104,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onPause() {
-
-
-        collection.addCoin(1);
         int[] temp = collection.getCollection();
         Set<String> buffer = collection.convertArrayToSet(temp);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putStringSet(getString(R.string.collection_key),buffer);
+        editor.putInt(getString(R.string.coin_key),collection.getCoin());
         editor.commit();
+
+        Log.d(TAG, "onPause: Coin=" + collection.getCoin());
 
         super.onPause();
 
@@ -130,6 +131,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Set<String> temp = sharedPref.getStringSet(getString(R.string.collection_key),emptySet);
             int[] buffer = collection.convertSetToArray(temp);
             collection.setCollection(buffer);
+            collection.setCoin(sharedPref.getInt(getString(R.string.coin_key),0));
         }
 
         super.onResume();
