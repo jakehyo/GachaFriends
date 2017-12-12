@@ -1,5 +1,6 @@
 package com.example.han.gachafriends;
 
+import java.util.Arrays;
 import android.content.Context;
 
 import java.util.ArrayList;
@@ -13,16 +14,22 @@ import java.util.Set;
 public class Collection {
 
     private int[] collection;
+    private int coin;
 
     public Collection()
     {
-        collection = new int[2];
-        collection[0] = 3;
-        collection[1] = 4;
+        this.collection = new int[]{0,1,2};
     }
 
-    public int[] getCollection(){
-        return collection;
+    public int[] convertSetToArray(Set<String> temp)
+    {
+        String[] temp2 = temp.toArray(new String[temp.size()]);
+        int[] ids = new int[temp2.length];
+        for (int i = 0; i < ids.length;i++)
+        {
+            ids[i] = Integer.parseInt(temp2[i]);
+        }
+        return ids;
     }
 
     public ArrayList<Friend> getFriendList(Context context){
@@ -33,12 +40,39 @@ public class Collection {
         return friendArrayList;
     }
 
-    public Set<String> convertSettoArray(int[] collection)
-    {
-        //Needs implementation
-
-        Set<String> temp = new HashSet<String>();
-        return temp;
-        //:L
+    public Set<String> convertArrayToSet(int[] temp) {
+        String[] temp2 = new String[temp.length];
+        for (int i = 0; i < temp.length; i++) {
+            temp2[i] = temp[i] + "";
+        }
+        Set<String> ids = new HashSet<String>(Arrays.asList(temp2));
+        return ids;
     }
+
+
+
+    public int getCoin() {
+        return coin;
+    }
+
+    public void setCoin(int coin) {
+        this.coin = coin;
+    }
+
+    public void addCoin(int i)
+    {
+        coin +=i;
+    }
+
+    public int[] getCollection() {
+        return collection;
+    }
+
+    public void setCollection(int[] collection) {
+        this.collection = collection;
+    }
+
+
+
+
 }
