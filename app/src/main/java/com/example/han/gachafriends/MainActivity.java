@@ -62,13 +62,6 @@ public class MainActivity extends AppCompatActivity{
         //pull the collection ids from shared prefs and instantiate the collection (or maybe in onResume)
     }
 
-    private void setOnClickListeners() {
-        homeImageButton.setOnClickListener(this);
-        missionImageButton.setOnClickListener(this);
-        summonImageButton.setOnClickListener(this);
-        collectionImageButton.setOnClickListener(this);
-    }
-
     private void wireWidgets() {
         coinText = (TextView) findViewById(R.id.coin_text);
     }

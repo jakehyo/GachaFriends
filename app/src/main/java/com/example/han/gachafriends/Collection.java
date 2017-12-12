@@ -18,7 +18,7 @@ public class Collection {
 
     public Collection()
     {
-        this.collection = new int[]{0,1,2};
+        this.collection = new int[]{3,4};
     }
 
     public int[] convertSetToArray(Set<String> temp)

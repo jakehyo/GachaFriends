@@ -77,10 +77,12 @@ public class FragmentCollection extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
         collection = new Collection();
+        Drawable extra = getResources().getDrawable(collection.getFriendList(getContext()).get(1).getImageId());
     }
 
     private void setupGridView() {
-       friendArrayAdapter = new ArrayAdapter<Friend>(getContext(), android.R.layout.simple_list_item_1,collection.getFriendList(getContext()));
+       //friendArrayAdapter = new ArrayAdapter<Friend>(getContext(), android.R.layout.simple_list_item_1, collection.getFriendList(getContext()));
+
        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
            @Override
            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -101,7 +103,14 @@ public class FragmentCollection extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         gridView = getView().findViewById(R.id.collection_view);
         setupGridView();
-        gridView.setAdapter(friendArrayAdapter);
+        gridView.setAdapter(new ArrayAdapter<Friend>(getContext(), android.R.layout.simple_list_item_1, collection.getFriendList(getContext())){
+           @Override
+           public View getView(int position, View convertView, ViewGroup parent) {
+               TextView textView = (TextView) super.getView(position, convertView, parent);
+               textView.setCompoundDrawables(null, getResources().getDrawable(collection.getFriendList(getContext()).get(position).getImageId()), null, null);
+               return textView;
+           }
+        });
     }
 
     // TODO: Rename method, update argument and hook method into UI event
