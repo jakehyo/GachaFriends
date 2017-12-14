@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import java.util.HashSet;
 import java.util.Set;
-
+//lol
 public class MainActivity extends AppCompatActivity{
 
     private ImageButton homeImageButton,missionImageButton,summonImageButton,collectionImageButton;
