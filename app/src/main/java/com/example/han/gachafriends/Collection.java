@@ -40,6 +40,10 @@ public class Collection {
         return friendArrayList;
     }
 
+    public Friend getFriend(int id, Context context){
+        return new Friend(collection[id], context);
+    }
+
     public Set<String> convertArrayToSet(int[] temp) {
         String[] temp2 = new String[temp.length];
         for (int i = 0; i < temp.length; i++) {
