@@ -2,14 +2,24 @@ package com.example.han.gachafriends;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Set;
 
 
@@ -32,6 +42,10 @@ public class FragmentCollection extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    private GridView gridView;
+    private Collection collection;
+    private ArrayAdapter<Friend> friendArrayAdapter;
 
     public FragmentCollection() {
         // Required empty public constructor
@@ -62,6 +76,19 @@ public class FragmentCollection extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        collection = new Collection();
+        Drawable extra = getResources().getDrawable(collection.getFriendList(getContext()).get(1).getImageId());
+    }
+
+    private void setupGridView() {
+       //friendArrayAdapter = new ArrayAdapter<Friend>(getContext(), android.R.layout.simple_list_item_1, collection.getFriendList(getContext()));
+
+       gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+           @Override
+           public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+           }
+       });
     }
 
     @Override
@@ -69,6 +96,21 @@ public class FragmentCollection extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_fragment_collection, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState){
+        super.onViewCreated(view, savedInstanceState);
+        gridView = getView().findViewById(R.id.collection_view);
+        setupGridView();
+        gridView.setAdapter(new ArrayAdapter<Friend>(getContext(), android.R.layout.simple_list_item_1, collection.getFriendList(getContext())){
+           @Override
+           public View getView(int position, View convertView, ViewGroup parent) {
+               TextView textView = (TextView) super.getView(position, convertView, parent);
+               textView.setCompoundDrawables(null, getResources().getDrawable(collection.getFriendList(getContext()).get(position).getImageId()), null, null);
+               return textView;
+           }
+        });
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -109,4 +151,6 @@ public class FragmentCollection extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+
 }

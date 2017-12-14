@@ -19,6 +19,7 @@ public class Summon{
     private BufferedReader nameReader;
     private ImageView image;
     private String name;
+
     public Summon (Context context)
     {
         mContext = context;
@@ -44,10 +45,10 @@ public class Summon{
 
     public Friend summon()
     {
-        setupText();
-        int total = totalLines();
+        Friend temp = new Friend(1, mContext);
+        int total = temp.totalLines();
         int friend = (int) (Math.random()*total + 1);
-        Friend temp = new Friend(friend, mContext);
+        temp = new Friend(friend, mContext);
         Log.d(TAG, temp.getName());
         Toast.makeText(mContext,"GET", Toast.LENGTH_SHORT).show();
         name = (temp.getName());
