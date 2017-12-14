@@ -8,9 +8,8 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 import android.util.Log;
-import android.view.View;
+import android.view.MenuItem;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -21,7 +20,7 @@ public class MainActivity extends AppCompatActivity{
 
     private ImageButton homeImageButton,missionImageButton,summonImageButton,collectionImageButton;
     public static TextView coinText;
-    private int coin = 5;
+    private static int coin = 5;
     public static final String TAG = "TIM_DEBUG";
     public TextView mTextMessage;
     private Collection collection;
@@ -40,20 +39,19 @@ public class MainActivity extends AppCompatActivity{
 
 
         wireWidgets();
-        setOnClickListeners();
 
-        coinText.setText("Coins: "+ coin);
+
+        coinText.setText("Coins: " + coin);
 
         // Set up SharedPreference storage
         emptySet.add("0");
         sharedPref = this.getPreferences(Context.MODE_PRIVATE);
         collection = new Collection();
 
-        int[] bufferSet = collection.convertSetToArray(sharedPref.getStringSet(getString(R.string.collection_key),emptySet));
+        int[] bufferSet = collection.convertSetToArray(sharedPref.getStringSet(getString(R.string.collection_key), emptySet));
         int bufferCoin = sharedPref.getInt(getString(R.string.coin_key), 0);
         collection.setCoin(bufferCoin);
         collection.setCollection(bufferSet);
-
 
 
         ranConstructor = true;
@@ -61,14 +59,17 @@ public class MainActivity extends AppCompatActivity{
 
         android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
         fm.beginTransaction().replace(R.id.fragment_container, new FragmentHome()).commit();
+    }
 
 
     public static void addCoin(){
         coinText.setText("Coins: "+ ++coin);
     }
     public static int getCoin() { return coin;}
-    public static void setCoin() { coinText.setText("Coins: "+ (coin - 5));
-        coin = coin-5;}
+    public static void setCoin() {
+        coin-=5;
+        coinText.setText("Coins: "+ coin);
+    }
     public static void resetCoin(){
         coin = 0;
         coinText.setText("Coins: "+ coin);

@@ -74,9 +74,9 @@ public class FragmentSummon extends Fragment implements View.OnClickListener{
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
-        summonButton = (Button) view.findViewById(R.id.SummonButton);
+        summonButton = view.findViewById(R.id.SummonButton);
         summonButton.setOnClickListener(this);
-        image = (ImageView) view.findViewById(R.id.imageViewTemp);
+        image = view.findViewById(R.id.imageViewTemp);
         name = view.findViewById(R.id.textViewName);
     }
 
