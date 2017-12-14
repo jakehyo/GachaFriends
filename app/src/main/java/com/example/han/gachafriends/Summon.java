@@ -2,7 +2,6 @@ package com.example.han.gachafriends;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -14,11 +13,12 @@ import java.io.InputStreamReader;
  * Created by per6 on 10/20/17.
  */
 
-public class Summon {
+public class Summon{
     public static final String TAG = "Tagg";
     private Context mContext;
     private BufferedReader nameReader;
     private ImageView image;
+    private String name;
 
     public Summon (Context context)
     {
@@ -50,10 +50,19 @@ public class Summon {
         int friend = (int) (Math.random()*total + 1);
         temp = new Friend(friend, mContext);
         Log.d(TAG, temp.getName());
-        Toast.makeText(mContext, temp.getName(), Toast.LENGTH_SHORT).show();
-
+        Toast.makeText(mContext,"GET", Toast.LENGTH_SHORT).show();
+        name = (temp.getName());
         return temp;
         //Collection.friends.add(temp);
         //?????
+
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
