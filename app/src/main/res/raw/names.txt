@@ -1,10 +1,100 @@
-Serval
-Caracal
+Adelie Penguin
+African Rock Python
 African Wild Dog
-Bald Eagle
+Alpine Ibex
 Atlantic Puffin
+Australian Brushturkey
+Axis Deer
+Bald Eagle
+Banteng
+Black Headed Ibis
+Black Jaguar
+Blue Whale
+Byakko
+California Sea Lion
+Capybara
+Caracal
 Chicken
+Chinese White Dolphin
+Chinstrap Penguin
+Cinereous Vulture
+Common Bottlenose Dolphin
+Common Brushtail Possum
+Common Degu
+Common Ostrich
+Common Ringtail Possum
+Common Wombat
+Crested Ibis
+Crested Porcupine
+Culpeo
+Dire Wolf
 Dodo
+Domestic Dog
+European Hare
 Ezo Red Fox
+Fossa
+Fraternal Myotis
+Gentoo Penguin
+Godzilla
 Golden Eagle
 Golden Snub Nosed Monkey
+Gray Fox
+Greater Bilby
+Guadalupe Caracara
+Hellbender
+Hipparion
+Humboldt Penguin
+Jaguarundi
+Japanese Black Bear
+Japanese Giant Salamander
+Japanese Wolf
+Kinshachi
+Koala
+Kyushu Owl
+Leopard Tortoise
+Linnaeuss Two Toed Sloth
+Lion
+Long Tailed Tit
+Malayan Tapir
+Maltese Tiger
+Medium Tree Finch
+Merlion
+Mountain Goat
+Mountain Zebra
+New Zealand Giant Penguin
+Nine Tailed Fox
+Oinari Sama
+Okapi
+Plains Zebra
+Pronghorn
+Raiju
+Red Junglefowl
+Red Panda
+Reticulated Giraffe
+Rhim Gazelle
+Royal Penguin
+Sable
+Sand Cat
+Schomburgks Deer
+Short Beaked Common Dolphin
+Siberian Husky
+Silver Fox
+Southern Rockhopper Penguin
+Southern Tamandua
+Springbok
+Squirrel Glider
+Sulawesi Bear Cuscus
+Sumatran Elephant
+Suri Alpaca
+Takin
+Tibetan Antelope
+Tibetan Sand Fox
+Tsuchinoko
+Tufted Puffin
+Tundra Wolf
+Water Deer
+White Eared Opossum
+White Tiger
+Woolly Mammoth
+Yatagarasu
+Yezo Sika Deer

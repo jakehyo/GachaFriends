@@ -18,6 +18,7 @@ public class Friend {
     private String desc;
     private Context mContext;
     private BufferedReader nameReader;
+    //private String imageName;
 
     public Friend(int id, Context context) {
         this.id = id;
@@ -71,6 +72,21 @@ public class Friend {
             nameWithUnderscores = nameWithUnderscores + tempLetter;
         }
         String imageName = "@drawable/" + nameWithUnderscores.toLowerCase();
+        return mContext.getResources().getIdentifier(imageName, "drawable", mContext.getPackageName());
+    }
+
+    public int getFrameId(){
+        String nameWithUnderscores = "";
+        for(int i = 0; i < name.length(); i++){
+            String tempLetter = "";
+            if(name.substring(i, i+1).equals(" ")){
+                tempLetter = "_";
+            } else {
+                tempLetter = name.substring(i, i+1);
+            }
+            nameWithUnderscores = nameWithUnderscores + tempLetter;
+        }
+        String imageName = "@drawable/" + nameWithUnderscores.toLowerCase() + "_frame";
         return mContext.getResources().getIdentifier(imageName, "drawable", mContext.getPackageName());
     }
 

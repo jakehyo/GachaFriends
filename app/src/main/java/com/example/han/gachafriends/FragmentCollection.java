@@ -134,7 +134,7 @@ public class FragmentCollection extends Fragment implements View.OnClickListener
            public View getView(int position, View convertView, ViewGroup parent) {
                TextView textView = (TextView) super.getView(position, convertView, parent);
                textView.setGravity(Gravity.CENTER);
-               textView.setCompoundDrawablesWithIntrinsicBounds(null, getResources().getDrawable(collection.getFriendList(getContext()).get(position).getImageId()), null, null);
+               textView.setCompoundDrawablesWithIntrinsicBounds(null, getResources().getDrawable(collection.getFriendList(getContext()).get(position).getFrameId()), null, null);
                return textView;
            }
         });
