@@ -1,15 +1,30 @@
 package com.example.han.gachafriends;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.GridView;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Set;
 
 
@@ -21,7 +36,7 @@ import java.util.Set;
  * Use the {@link FragmentCollection#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentCollection extends Fragment {
+public class FragmentCollection extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -32,6 +47,14 @@ public class FragmentCollection extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    private GridView gridView;
+    private Collection collection;
+    private ArrayAdapter<Friend> friendArrayAdapter;
+    private ImageButton close;
+    private ImageView friendImage;
+    private TextView friendName;
+    private PopupWindow window;
 
     public FragmentCollection() {
         // Required empty public constructor
@@ -62,6 +85,33 @@ public class FragmentCollection extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        collection = new Collection();
+        Drawable extra = getResources().getDrawable(collection.getFriendList(getContext()).get(1).getImageId());
+    }
+
+    private void setupGridView() {
+       //friendArrayAdapter = new ArrayAdapter<Friend>(getContext(), android.R.layout.simple_list_item_1, collection.getFriendList(getContext()));
+
+       gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+           @Override
+           public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Friend tappedFriend = collection.getFriend(i, getContext());
+                Log.d(MainActivity.TAG, "onItemClick: " + tappedFriend.getName());
+                createPopup(tappedFriend);
+           }
+       });
+    }
+
+    private void createPopup(Friend friend) {
+        friendImage.setImageDrawable(getResources().getDrawable(friend.getImageId()));
+        friendName.setText(friend.getName());
+        LinearLayout popupLayout = new LinearLayout(getContext());
+        popupLayout.setOrientation(LinearLayout.VERTICAL);
+        popupLayout.addView(close);
+        popupLayout.addView(friendName);
+        popupLayout.addView(friendImage);
+        window = new PopupWindow(popupLayout, ActionBar.LayoutParams.FILL_PARENT, ActionBar.LayoutParams.WRAP_CONTENT);
+        window.setContentView(popupLayout);
     }
 
     @Override
@@ -69,6 +119,32 @@ public class FragmentCollection extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_fragment_collection, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState){
+        super.onViewCreated(view, savedInstanceState);
+        gridView = getView().findViewById(R.id.collection_view);
+
+        setupGridView();
+        setupPopup();
+
+        gridView.setAdapter(new ArrayAdapter<Friend>(getContext(), android.R.layout.simple_list_item_1, collection.getFriendList(getContext())){
+           @Override
+           public View getView(int position, View convertView, ViewGroup parent) {
+               TextView textView = (TextView) super.getView(position, convertView, parent);
+               textView.setGravity(Gravity.CENTER);
+               textView.setCompoundDrawablesWithIntrinsicBounds(null, getResources().getDrawable(collection.getFriendList(getContext()).get(position).getImageId()), null, null);
+               return textView;
+           }
+        });
+    }
+
+    private void setupPopup() {
+        close = new ImageButton(getContext());
+        close.setOnClickListener(this);
+        friendImage = new ImageView(getContext());
+        friendName = new TextView((getContext()));
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -95,6 +171,13 @@ public class FragmentCollection extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public void onClick(View view) {
+        if(view.getId() == R.id.close_x){
+            window.dismiss();
+        }
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -109,4 +192,6 @@ public class FragmentCollection extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+
 }

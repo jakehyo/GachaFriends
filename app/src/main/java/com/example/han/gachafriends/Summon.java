@@ -13,11 +13,12 @@ import java.io.InputStreamReader;
  * Created by per6 on 10/20/17.
  */
 
-public class Summon {
+public class Summon{
     public static final String TAG = "Tagg";
     private Context mContext;
     private BufferedReader nameReader;
     private ImageView image;
+    private String name;
 
     public Summon (Context context)
     {
@@ -44,15 +45,24 @@ public class Summon {
 
     public Friend summon()
     {
-        setupText();
-        int total = totalLines();
+        Friend temp = new Friend(1, mContext);
+        int total = temp.totalLines();
         int friend = (int) (Math.random()*total + 1);
-        Friend temp = new Friend(friend, mContext);
+        temp = new Friend(friend, mContext);
         Log.d(TAG, temp.getName());
-        Toast.makeText(mContext, temp.getName(), Toast.LENGTH_SHORT).show();
-        
+        Toast.makeText(mContext,"GET", Toast.LENGTH_SHORT).show();
+        name = (temp.getName());
         return temp;
         //Collection.friends.add(temp);
         //?????
+
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

@@ -1,7 +1,6 @@
 package com.example.han.gachafriends;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.TextView;
 
 
 /**
@@ -35,6 +34,7 @@ public class FragmentSummon extends Fragment implements View.OnClickListener{
     private Button summonButton;
     private Summon tempSummon;
     private ImageView image;
+    private TextView name;
     private OnFragmentInteractionListener mListener;
     private final String TAG = "TAGG";
 
@@ -74,9 +74,10 @@ public class FragmentSummon extends Fragment implements View.OnClickListener{
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
-        summonButton = (Button) view.findViewById(R.id.SummonButton);
+        summonButton = view.findViewById(R.id.SummonButton);
         summonButton.setOnClickListener(this);
-        image = (ImageView) view.findViewById(R.id.imageViewTemp);
+        image = view.findViewById(R.id.imageViewTemp);
+        name = view.findViewById(R.id.textViewName);
     }
 
     @Override
@@ -112,9 +113,18 @@ public class FragmentSummon extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
-        Friend tempFriend = tempSummon.summon();
-        image.setImageResource(tempFriend.getImageId());
-    }
+        if (MainActivity.getCoin() >= 5) {
+            Friend tempFriend = tempSummon.summon();
+            image.setImageResource(tempFriend.getImageId());
+            name.setText(tempSummon.getName());
+            MainActivity.setCoin();
+            Log.d(TAG, "onClick: ");
+        }
+       else if(MainActivity.getCoin() <= 5) {
+
+        }
+        }
+
 
     /**
      * This interface must be implemented by activities that contain this
