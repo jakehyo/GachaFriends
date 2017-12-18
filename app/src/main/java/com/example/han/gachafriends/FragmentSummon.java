@@ -4,13 +4,13 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.util.Log;
 
 
 /**
@@ -32,11 +32,12 @@ public class FragmentSummon extends Fragment implements View.OnClickListener{
     private String mParam2;
     private Context mContext;
     private Button summonButton;
-    private Summon tempSummon;
     private ImageView image;
     private TextView name;
     private OnFragmentInteractionListener mListener;
     private final String TAG = "TAGG";
+    private Collection collection;
+    private Summon summon;
 
     public FragmentSummon() {
         // Required empty public constructor
@@ -67,8 +68,12 @@ public class FragmentSummon extends Fragment implements View.OnClickListener{
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        mContext = getContext();
-        tempSummon = new Summon(mContext);
+
+        Bundle bundle = getArguments();
+        if(bundle != null) {
+            collection =  bundle.getParcelable(getString(R.string.collection));
+            summon =  bundle.getParcelable(getString(R.string.summon));
+        }
     }
 
     @Override
@@ -109,14 +114,18 @@ public class FragmentSummon extends Fragment implements View.OnClickListener{
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(getString(R.string.collection),collection);
+        bundle.putParcelable(getString(R.string.summon),summon);
+        setArguments(bundle);
     }
 
     @Override
     public void onClick(View view) {
         if (MainActivity.getCoin() >= 5) {
-            Friend tempFriend = tempSummon.summon();
+            Friend tempFriend = summon.summon();
             image.setImageResource(tempFriend.getImageId());
-            name.setText(tempSummon.getName());
+            name.setText(summon.getName());
             MainActivity.setCoin();
             Log.d(TAG, "onClick: ");
         }

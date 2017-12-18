@@ -2,10 +2,7 @@ package com.example.han.gachafriends;
 
 import android.app.ActionBar;
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -15,17 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Set;
 
 
 /**
@@ -49,8 +41,9 @@ public class FragmentCollection extends Fragment implements View.OnClickListener
     private OnFragmentInteractionListener mListener;
 
     private GridView gridView;
-    private Collection collection;
     private ArrayAdapter<Friend> friendArrayAdapter;
+    private Collection collection;
+    private Summon summon;
     private ImageButton close;
     private ImageView friendImage;
     private TextView friendName;
@@ -85,8 +78,12 @@ public class FragmentCollection extends Fragment implements View.OnClickListener
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        collection = new Collection();
-        Drawable extra = getResources().getDrawable(collection.getFriendList(getContext()).get(1).getImageId());
+
+            Bundle bundle = getArguments();
+            if(bundle != null) {
+                collection =  bundle.getParcelable(getString(R.string.collection));
+                summon =  bundle.getParcelable(getString(R.string.summon));
+            }
     }
 
     private void setupGridView() {
@@ -169,6 +166,10 @@ public class FragmentCollection extends Fragment implements View.OnClickListener
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(getString(R.string.collection),collection);
+        bundle.putParcelable(getString(R.string.summon),summon);
+        setArguments(bundle);
     }
 
     @Override

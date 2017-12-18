@@ -1,9 +1,11 @@
 package com.example.han.gachafriends;
 
-import java.util.Arrays;
 import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,7 +13,7 @@ import java.util.Set;
  * Created by per6 on 10/20/17.
  */
 
-public class Collection {
+public class Collection implements Parcelable {
 
     private int[] collection;
     private int coin;
@@ -77,6 +79,31 @@ public class Collection {
     }
 
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeIntArray(this.collection);
+        dest.writeInt(this.coin);
+    }
 
+    protected Collection(Parcel in) {
+        this.collection = in.createIntArray();
+        this.coin = in.readInt();
+    }
+
+    public static final Parcelable.Creator<Collection> CREATOR = new Parcelable.Creator<Collection>() {
+        @Override
+        public Collection createFromParcel(Parcel source) {
+            return new Collection(source);
+        }
+
+        @Override
+        public Collection[] newArray(int size) {
+            return new Collection[size];
+        }
+    };
 }

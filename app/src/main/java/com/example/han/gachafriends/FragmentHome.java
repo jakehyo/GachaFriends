@@ -4,9 +4,12 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import static com.example.han.gachafriends.MainActivity.TAG;
 
 
 /**
@@ -22,6 +25,8 @@ public class FragmentHome extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private Collection collection;
+    private Summon summon;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -58,6 +63,15 @@ public class FragmentHome extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
+        Bundle bundle = getArguments();
+        if(bundle != null) {
+            collection = (Collection) bundle.getParcelable(getString(R.string.collection));
+            summon =  (Summon) bundle.getParcelable(getString(R.string.summon));
+        }
+        Log.d(TAG, "onCreateFrag: " + (collection.getCoin()));
+
     }
 
     @Override
@@ -89,6 +103,11 @@ public class FragmentHome extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(getString(R.string.collection),collection);
+        bundle.putParcelable(getString(R.string.summon),summon);
+        setArguments(bundle);
+
     }
 
     /**

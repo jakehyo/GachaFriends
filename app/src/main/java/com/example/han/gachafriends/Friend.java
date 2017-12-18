@@ -5,7 +5,6 @@ import android.content.Context;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.nio.Buffer;
 
 /**
  * Created by per6 on 10/20/17.
@@ -19,6 +18,7 @@ public class Friend {
     private Context mContext;
     private BufferedReader nameReader;
     //private String imageName;
+
 
     public Friend(int id, Context context) {
         this.id = id;

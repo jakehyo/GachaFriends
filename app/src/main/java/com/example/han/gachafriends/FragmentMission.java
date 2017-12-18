@@ -33,6 +33,8 @@ public class FragmentMission extends Fragment implements View.OnClickListener{
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private Collection collection;
+    private Summon summon;
 
     private Button m1Button, m2Button, m3Button, upButton, downButton, rightButton, leftButton;
     private OnFragmentInteractionListener mListener;
@@ -67,6 +69,12 @@ public class FragmentMission extends Fragment implements View.OnClickListener{
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+
+            Bundle bundle = getArguments();
+            if(bundle != null) {
+                collection =  bundle.getParcelable(getString(R.string.collection));
+                summon =  bundle.getParcelable(getString(R.string.summon));
+            }
         }
     }
 
@@ -154,6 +162,10 @@ public class FragmentMission extends Fragment implements View.OnClickListener{
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(getString(R.string.collection),collection);
+        bundle.putParcelable(getString(R.string.summon),summon);
+        setArguments(bundle);
     }
  private void createActions() {
         actions = new ArrayList<String>();

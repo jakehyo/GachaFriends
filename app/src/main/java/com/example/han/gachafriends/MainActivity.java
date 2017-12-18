@@ -24,9 +24,18 @@ public class MainActivity extends AppCompatActivity{
     public static final String TAG = "TIM_DEBUG";
     public TextView mTextMessage;
     private Collection collection;
+    private Summon summon;
+    private Bundle bundle;
+
     private Set<String> emptySet = new HashSet<String>();
     private boolean ranConstructor;
     private SharedPreferences sharedPref;
+
+    public Fragment fragmentHome;
+    public Fragment fragmentCollection;
+    public Fragment fragmentSummon;
+    public Fragment fragmentMission;
+    public Fragment previousFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +56,7 @@ public class MainActivity extends AppCompatActivity{
         emptySet.add("0");
         sharedPref = this.getPreferences(Context.MODE_PRIVATE);
         collection = new Collection();
+        summon = new Summon(this);
 
         int[] bufferSet = collection.convertSetToArray(sharedPref.getStringSet(getString(R.string.collection_key), emptySet));
         int bufferCoin = sharedPref.getInt(getString(R.string.coin_key), 0);
@@ -56,9 +66,24 @@ public class MainActivity extends AppCompatActivity{
 
         ranConstructor = true;
 
+        fragmentCollection = new FragmentCollection();
+        fragmentHome = new FragmentHome();
+        fragmentMission = new FragmentMission();
+        fragmentSummon = new FragmentSummon();
+
+        bundle = new Bundle();
+        bundle.putParcelable(getString(R.string.collection),collection);
+        bundle.putParcelable(getString(R.string.summon),summon);
+        fragmentHome.setArguments(bundle);
+        previousFragment = fragmentHome;
 
         android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
-        fm.beginTransaction().replace(R.id.fragment_container, new FragmentHome()).commit();
+        fm.beginTransaction().replace(R.id.fragment_container, fragmentHome).commit();
+
+
+        //set the arguments for the bundle so it works on startup
+
+        //pull the collection ids from shared prefs and instantiate the collection (or maybe in onResume)
     }
 
 
@@ -86,16 +111,37 @@ public class MainActivity extends AppCompatActivity{
             Fragment currentFragment = null;
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    currentFragment = new FragmentHome();
+                    bundle = previousFragment.getArguments();
+                    collection = bundle.getParcelable(getString(R.string.collection));
+                    summon = bundle.getParcelable(getString(R.string.summon));
+                    fragmentHome.setArguments(bundle);
+                    currentFragment = fragmentHome;
+                    previousFragment = fragmentHome;
                     break;
                 case R.id.navigation_collection:
-                    currentFragment = new FragmentCollection();
+                    bundle = previousFragment.getArguments();
+                    collection = bundle.getParcelable(getString(R.string.collection));
+                    summon = bundle.getParcelable(getString(R.string.summon));
+                    fragmentCollection.setArguments(bundle);
+                    currentFragment = fragmentCollection;
+                    previousFragment = fragmentCollection;
                     break;
                 case R.id.navigation_summon:
-                    currentFragment = new FragmentSummon();
+                    bundle = previousFragment.getArguments();
+                    collection = bundle.getParcelable(getString(R.string.collection));
+                    summon = bundle.getParcelable(getString(R.string.summon));
+                    fragmentSummon.setArguments(bundle);
+                    currentFragment = fragmentSummon;
+                    previousFragment = fragmentSummon;
+
                     break;
                 case R.id.navigation_mission:
-                    currentFragment = new FragmentMission();
+                    bundle = previousFragment.getArguments();
+                    collection = bundle.getParcelable(getString(R.string.collection));
+                    summon = bundle.getParcelable(getString(R.string.summon));
+                    fragmentMission.setArguments(bundle);
+                    currentFragment = fragmentMission;
+                    previousFragment = fragmentMission;
                     break;
             }
             FragmentManager fm = getSupportFragmentManager();
@@ -105,6 +151,14 @@ public class MainActivity extends AppCompatActivity{
             return true;
         }
     };
+
+    public Collection getCollection() {
+        return collection;
+    }
+
+    public void setCollection(Collection collection) {
+        this.collection = collection;
+    }
 
     @Override
     protected void onPause() {

@@ -2,6 +2,8 @@ package com.example.han.gachafriends;
 
 import android.content.Context;
 import android.util.Log;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -13,7 +15,7 @@ import java.io.InputStreamReader;
  * Created by per6 on 10/20/17.
  */
 
-public class Summon{
+public class Summon implements Parcelable {
     public static final String TAG = "Tagg";
     private Context mContext;
     private BufferedReader nameReader;
@@ -53,9 +55,6 @@ public class Summon{
         Toast.makeText(mContext,"GET", Toast.LENGTH_SHORT).show();
         name = (temp.getName());
         return temp;
-        //Collection.friends.add(temp);
-        //?????
-
     }
 
     public String getName() {
@@ -65,4 +64,37 @@ public class Summon{
     public void setName(String name) {
         this.name = name;
     }
+
+
+
+    protected Summon(Parcel in) {
+        mContext = (Context) in.readValue(Context.class.getClassLoader());
+        nameReader = (BufferedReader) in.readValue(BufferedReader.class.getClassLoader());
+        image = (ImageView) in.readValue(ImageView.class.getClassLoader());
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(mContext);
+        dest.writeValue(nameReader);
+        dest.writeValue(image);
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<Summon> CREATOR = new Parcelable.Creator<Summon>() {
+        @Override
+        public Summon createFromParcel(Parcel in) {
+            return new Summon(in);
+        }
+
+        @Override
+        public Summon[] newArray(int size) {
+            return new Summon[size];
+        }
+    };
 }
