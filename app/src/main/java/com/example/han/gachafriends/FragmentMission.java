@@ -27,7 +27,9 @@ public class FragmentMission extends Fragment implements View.OnClickListener{
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     public static final String TAG = "TAGG";
-    public static TextView actionText;
+    public  TextView actionText;
+    public int action;
+    public int player;
     private ArrayList<String> actions;
     
     // TODO: Rename and change types of parameters
@@ -72,14 +74,9 @@ public class FragmentMission extends Fragment implements View.OnClickListener{
 
 
     private void setOnClickListeners() {
-        m1Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MainActivity.addCoin();
-            }
-        });
-        m2Button.setOnClickListener(this);
-        m3Button.setOnClickListener(this);
+        m1Button.setOnClickListener(this);
+        //m2Button.setOnClickListener(this);
+        //m3Button.setOnClickListener(this);
         upButton.setOnClickListener(this);
         downButton.setOnClickListener(this);
         leftButton.setOnClickListener(this);
@@ -90,8 +87,8 @@ public class FragmentMission extends Fragment implements View.OnClickListener{
             super.onViewCreated(view, savedInstanceState);
 
             m1Button = view.findViewById(R.id.buttonM1);
-            m2Button = view.findViewById(R.id.buttonM2);
-            m3Button = view.findViewById(R.id.buttonM3);
+            //m2Button = view.findViewById(R.id.buttonM2);
+            //m3Button = view.findViewById(R.id.buttonM3);
             upButton = view.findViewById(R.id.buttonUp);
             downButton = view.findViewById(R.id.buttonDown);
             leftButton = view.findViewById(R.id.buttonLeft);
@@ -171,24 +168,88 @@ public class FragmentMission extends Fragment implements View.OnClickListener{
 
         switch (view.getId()) {
              case R.id.buttonM1:
+                 actionText.setVisibility(View.VISIBLE);
                  actionText.setText(actions.get((int) (Math.random()*7)));
-                 m2Button.setEnabled(false);
-                 m3Button.setEnabled(false);
+                 action = actions.indexOf(actionText.getText().toString());
+                 m1Button.setEnabled(false);
+                 if(action == 0 || action == 4) {
+                     action = 1;
+                 }
+                else if(action == 1 || action == 5) {
+                     action = 2;
+                 }
+                 else if(action == 2 || action == 6) {
+                     action = 3;
+                 }
+                 else if(action == 3 || action == 7) {
+                     action = 4;
+                 }
+            break;
+             //case R.id.buttonM2:
+            //actionText.setVisibility(View.VISIBLE);
+            //actionText.setText(actions.get((int) (Math.random()*7)));
+            // MainActivity.addCoin();
+             //MainActivity.addCoin();
+             //MainActivity.addCoin();
+            //break;
+            // case R.id.buttonM3:
+            //actionText.setVisibility(View.VISIBLE);
+                 //actionText.setText(actions.get((int) (Math.random()*7)));
+             //MainActivity.addCoin();
+             //MainActivity.addCoin();
+            // MainActivity.addCoin();
+             //MainActivity.addCoin();
+            // MainActivity.addCoin();
+             //break;
+            case R.id.buttonRight:
+               player = 2;
+                if(action == player) {
+                    MainActivity.addCoin();
+                    action = 0;
+                    m1Button.setEnabled(true);
+                    actionText.setText("Mission Success");
+                }
+                    else{actionText.setText("Mission Fail");
+                    m1Button.setEnabled(true);
+                    }
 
-             MainActivity.addCoin();
-             break;
-             case R.id.buttonM2:
-             MainActivity.addCoin();
-             MainActivity.addCoin();
-             MainActivity.addCoin();
-             break;
-             case R.id.buttonM3:
-             MainActivity.addCoin();
-             MainActivity.addCoin();
-             MainActivity.addCoin();
-             MainActivity.addCoin();
-             MainActivity.addCoin();
-             break;
+               break;
+            case R.id.buttonLeft:
+            player = 1;
+                if(action == player) {
+                    MainActivity.addCoin();
+                    action = 0;
+                    m1Button.setEnabled(true);
+                    actionText.setText("Mission Success");
+                }
+                else{actionText.setText("Mission Fail");
+                    m1Button.setEnabled(true);
+                }
+            break;
+            case R.id.buttonUp:
+                player = 4;
+                if(action == player) {
+                    MainActivity.addCoin();
+                    action = 0;
+                    m1Button.setEnabled(true);
+                    actionText.setText("Mission Success");
+                }
+                else{actionText.setText("Mission Fail");
+                    m1Button.setEnabled(true);
+                }
+                break;
+            case R.id.buttonDown:
+                player = 3;
+                if(action == player) {
+                    MainActivity.addCoin();
+                    action = 0;
+                    m1Button.setEnabled(true);
+                    actionText.setText("Mission Success");
+                }
+                else{actionText.setText("Mission Fail");
+                    m1Button.setEnabled(true);
+                }
+                break;
              }
         }
 
