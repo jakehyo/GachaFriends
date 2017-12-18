@@ -20,7 +20,7 @@ public class Collection implements Parcelable {
 
     public Collection()
     {
-        this.collection = new int[]{3,4};
+        this.collection = new int[]{3,4,10,13,15,17,20,25};
     }
 
     public int[] convertSetToArray(Set<String> temp)
