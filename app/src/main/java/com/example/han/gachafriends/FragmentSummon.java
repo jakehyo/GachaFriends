@@ -1,6 +1,9 @@
 package com.example.han.gachafriends;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -37,6 +40,8 @@ public class FragmentSummon extends Fragment implements View.OnClickListener{
     private TextView name;
     private OnFragmentInteractionListener mListener;
     private final String TAG = "TAGG";
+
+    private final int FRIEND_IMAGE_HEIGHT = 140;
 
     public FragmentSummon() {
         // Required empty public constructor
@@ -115,6 +120,20 @@ public class FragmentSummon extends Fragment implements View.OnClickListener{
     public void onClick(View view) {
         if (MainActivity.getCoin() >= 5) {
             Friend tempFriend = tempSummon.summon();
+
+            Drawable tempImageDrawable = getResources().getDrawable(tempFriend.getImageId());
+            Bitmap bitmap = ((BitmapDrawable) tempImageDrawable).getBitmap();
+
+            /*int drawableHeight = tempImageDrawable.getIntrinsicHeight();
+            int drawableWidth = tempImageDrawable.getIntrinsicWidth();
+
+            int scaledWidth = FRIEND_IMAGE_HEIGHT * drawableWidth / drawableHeight;
+            int scaledHeight = FRIEND_IMAGE_HEIGHT;
+
+            Drawable imageScaled = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap, scaledWidth, scaledHeight , true));
+            image.setMaxHeight(scaledHeight);
+            image.setMaxWidth(scaledWidth);
+*/
             image.setImageResource(tempFriend.getImageId());
             name.setText(tempSummon.getName());
             MainActivity.setCoin();
