@@ -19,6 +19,8 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import static android.content.ContentValues.TAG;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -131,6 +133,7 @@ public class FragmentCollection extends Fragment implements View.OnClickListener
            public View getView(int position, View convertView, ViewGroup parent) {
                TextView textView = (TextView) super.getView(position, convertView, parent);
                textView.setGravity(Gravity.CENTER);
+               Log.d(TAG, "getView: " + collection.getFriendList(getContext()).size());
                textView.setCompoundDrawablesWithIntrinsicBounds(null, getResources().getDrawable(collection.getFriendList(getContext()).get(position).getFrameId()), null, null);
                return textView;
            }

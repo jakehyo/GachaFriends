@@ -50,13 +50,16 @@ public class MainActivity extends AppCompatActivity{
         wireWidgets();
 
         // Set up SharedPreference storage
-        emptySet.add("0");
+        emptySet.add("7");
         sharedPref = this.getPreferences(Context.MODE_PRIVATE);
         collection = new Collection();
         summon = new Summon(this);
 
+
+
         int[] bufferSet = collection.convertSetToArray(sharedPref.getStringSet(getString(R.string.collection_key), emptySet));
         int bufferCoin = sharedPref.getInt(getString(R.string.coin_key), 0);
+        Log.d(TAG, "onCreate Set: " + bufferSet[0]);
         collection.setCoin(bufferCoin);
         collection.setCollection(bufferSet);
 
