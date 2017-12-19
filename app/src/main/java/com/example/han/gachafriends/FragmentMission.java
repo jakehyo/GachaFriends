@@ -154,14 +154,14 @@ public class FragmentMission extends Fragment implements View.OnClickListener{
     }
  private void createActions() {
         actions = new ArrayList<String>();
-        actions.add("Cerelean strikes to the right.");
-        actions.add("Cerelean strikes to the left.");
+        actions.add("Cerelean strikes right.");
+        actions.add("Cerelean strikes left.");
         actions.add("Cerelean strikes above.");
         actions.add("Cerelean strikes below.");
-        actions.add("Cerelean blocks right.");
-        actions.add("Cerelean blocks left.");
-        actions.add("Cerelean blocks up.");
-        actions.add("Cerelean blocks down.");
+        actions.add("Cerelean strikes right.");
+        actions.add("Cerelean strikes left.");
+        actions.add("Cerelean strikes up.");
+        actions.add("Cerelean strikes down.");
  }
     @Override
     public void onClick(View view) {
@@ -204,7 +204,8 @@ public class FragmentMission extends Fragment implements View.OnClickListener{
             case R.id.buttonRight:
                player = 2;
                 if(action == player) {
-                    MainActivity.addCoin();
+                    collection.addCoin(1);
+                    collection.updateCoin();
                     action = 0;
                     m1Button.setEnabled(true);
                     actionText.setText("Mission Success");
@@ -217,7 +218,8 @@ public class FragmentMission extends Fragment implements View.OnClickListener{
             case R.id.buttonLeft:
             player = 1;
                 if(action == player) {
-                    MainActivity.addCoin();
+                    collection.addCoin(1);
+                    collection.updateCoin();
                     action = 0;
                     m1Button.setEnabled(true);
                     actionText.setText("Mission Success");
@@ -229,7 +231,8 @@ public class FragmentMission extends Fragment implements View.OnClickListener{
             case R.id.buttonUp:
                 player = 4;
                 if(action == player) {
-                    MainActivity.addCoin();
+                    collection.addCoin(1);
+                    collection.updateCoin();
                     action = 0;
                     m1Button.setEnabled(true);
                     actionText.setText("Mission Success");
@@ -241,7 +244,8 @@ public class FragmentMission extends Fragment implements View.OnClickListener{
             case R.id.buttonDown:
                 player = 3;
                 if(action == player) {
-                    MainActivity.addCoin();
+                    collection.addCoin(1);
+                    collection.updateCoin();
                     action = 0;
                     m1Button.setEnabled(true);
                     actionText.setText("Mission Success");
