@@ -34,6 +34,19 @@ public class Collection implements Parcelable {
         return ids;
     }
 
+    public void addFriend(int id)
+    {
+        int[] temp = new int[collection.length+1];
+        int i = 0;
+        for (int num: collection)
+        {
+            temp[i] = num;
+            i++;
+        }
+        temp[collection.length] = id;
+        collection = temp;
+    }
+
     public ArrayList<Friend> getFriendList(Context context){
         ArrayList<Friend> friendArrayList = new ArrayList<>();
         for(int friendID : collection){
@@ -55,6 +68,20 @@ public class Collection implements Parcelable {
         return ids;
     }
 
+    public void addCoin(int i)
+    {
+        coin +=i;
+    }
+
+    public void removeCoin(int i)
+    {
+        coin -= i;
+    }
+
+    public void updateCoin()
+    {
+        MainActivity.coinText.setText("Coins: "+coin);
+    }
 
 
     public int getCoin() {
@@ -65,10 +92,12 @@ public class Collection implements Parcelable {
         this.coin = coin;
     }
 
-    public void addCoin(int i)
+    public void resetCoin()
     {
-        coin +=i;
+        this.coin = 0;
     }
+
+
 
     public int[] getCollection() {
         return collection;

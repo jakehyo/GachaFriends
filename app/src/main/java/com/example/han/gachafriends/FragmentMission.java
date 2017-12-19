@@ -80,12 +80,7 @@ public class FragmentMission extends Fragment implements View.OnClickListener{
 
 
     private void setOnClickListeners() {
-        m1Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MainActivity.addCoin();
-            }
-        });
+        m1Button.setOnClickListener(this);
         m2Button.setOnClickListener(this);
         m3Button.setOnClickListener(this);
         upButton.setOnClickListener(this);
@@ -187,19 +182,16 @@ public class FragmentMission extends Fragment implements View.OnClickListener{
                  m2Button.setEnabled(false);
                  m3Button.setEnabled(false);
 
-             MainActivity.addCoin();
+             collection.addCoin(1);
+             collection.updateCoin();
              break;
              case R.id.buttonM2:
-             MainActivity.addCoin();
-             MainActivity.addCoin();
-             MainActivity.addCoin();
+             collection.addCoin(3);
+             collection.updateCoin();
              break;
              case R.id.buttonM3:
-             MainActivity.addCoin();
-             MainActivity.addCoin();
-             MainActivity.addCoin();
-             MainActivity.addCoin();
-             MainActivity.addCoin();
+             collection.addCoin(5);
+             collection.updateCoin();
              break;
              }
         }

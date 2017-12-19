@@ -49,9 +49,6 @@ public class MainActivity extends AppCompatActivity{
 
         wireWidgets();
 
-
-        coinText.setText("Coins: " + coin);
-
         // Set up SharedPreference storage
         emptySet.add("0");
         sharedPref = this.getPreferences(Context.MODE_PRIVATE);
@@ -66,6 +63,8 @@ public class MainActivity extends AppCompatActivity{
 
         ranConstructor = true;
 
+        coinText.setText("Coins: " + collection.getCoin());
+
         fragmentCollection = new FragmentCollection();
         fragmentHome = new FragmentHome();
         fragmentMission = new FragmentMission();
@@ -79,11 +78,6 @@ public class MainActivity extends AppCompatActivity{
 
         android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
         fm.beginTransaction().replace(R.id.fragment_container, fragmentHome).commit();
-
-
-        //set the arguments for the bundle so it works on startup
-
-        //pull the collection ids from shared prefs and instantiate the collection (or maybe in onResume)
     }
 
 

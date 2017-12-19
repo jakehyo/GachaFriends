@@ -20,6 +20,14 @@ public class Friend {
     //private String imageName;
 
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public Friend(int id, Context context) {
         this.id = id;
         mContext = context;
