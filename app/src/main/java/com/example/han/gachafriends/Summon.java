@@ -81,6 +81,7 @@ public class Summon implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(mContext);
+        // Causes crash whenever Activity closes or pauses.
         dest.writeValue(nameReader);
         dest.writeValue(image);
     }

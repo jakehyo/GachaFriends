@@ -37,11 +37,9 @@ public class Collection implements Parcelable {
     public void addFriend(int id)
     {
         int[] temp = new int[collection.length+1];
-        int i = 0;
-        for (int num: collection)
+        for (int i =0; i < collection.length; i++)
         {
-            temp[i] = num;
-            i++;
+            temp[i] = collection[i];
         }
         temp[collection.length] = id;
         collection = temp;
@@ -49,8 +47,9 @@ public class Collection implements Parcelable {
 
     public ArrayList<Friend> getFriendList(Context context){
         ArrayList<Friend> friendArrayList = new ArrayList<>();
-        for(int friendID : collection){
-            friendArrayList.add(new Friend(friendID, context));
+        for (int i = 0; i < collection.length; i++)
+        {
+            friendArrayList.add(new Friend(collection[i], context));
         }
         return friendArrayList;
     }
@@ -122,6 +121,13 @@ public class Collection implements Parcelable {
     protected Collection(Parcel in) {
         this.collection = in.createIntArray();
         this.coin = in.readInt();
+    }
+
+    @Override
+    public String toString() {
+        return "Collection{" +
+                "collection=" + Arrays.toString(collection) +
+                '}';
     }
 
     public static final Parcelable.Creator<Collection> CREATOR = new Parcelable.Creator<Collection>() {

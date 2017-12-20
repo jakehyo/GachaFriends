@@ -130,7 +130,6 @@ public class FragmentSummon extends Fragment implements View.OnClickListener{
     public void onClick(View view) {
         if (collection.getCoin() >= 5) {
             Friend tempFriend = summon.summon();
-
             Drawable tempImageDrawable = getResources().getDrawable(tempFriend.getImageId());
             Bitmap bitmap = ((BitmapDrawable) tempImageDrawable).getBitmap();
 
@@ -148,9 +147,15 @@ public class FragmentSummon extends Fragment implements View.OnClickListener{
             name.setText(summon.getName());
             collection.addFriend(tempFriend.getId());
 
+            //For Testing Purposes
             collection.removeCoin(5);
+            Bundle bundle = new Bundle();
+            bundle.putParcelable(getString(R.string.collection),collection);
+            bundle.putParcelable(getString(R.string.summon),summon);
+            setArguments(bundle);
+
             collection.updateCoin();
-            Log.d(TAG, "onClick: ");
+            Log.d(TAG, "onClickSummon: " + collection.toString());
         }
        else if(collection.getCoin() <= 5) {
 

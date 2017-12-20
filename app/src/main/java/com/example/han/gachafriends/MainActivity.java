@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity{
         summon = new Summon(this);
 
 
-
         int[] bufferSet = collection.convertSetToArray(sharedPref.getStringSet(getString(R.string.collection_key), emptySet));
         int bufferCoin = sharedPref.getInt(getString(R.string.coin_key), 0);
         Log.d(TAG, "onCreate Set: " + bufferSet[0]);
@@ -81,20 +80,6 @@ public class MainActivity extends AppCompatActivity{
 
         android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
         fm.beginTransaction().replace(R.id.fragment_container, fragmentHome).commit();
-    }
-
-
-    public static void addCoin(){
-        coinText.setText("Coins: "+ ++coin);
-    }
-    public static int getCoin() { return coin;}
-    public static void setCoin() {
-        coin-=5;
-        coinText.setText("Coins: "+ coin);
-    }
-    public static void resetCoin(){
-        coin = 0;
-        coinText.setText("Coins: "+ coin);
     }
 
     private void wireWidgets() {
