@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 //lol
@@ -51,12 +52,21 @@ public class MainActivity extends AppCompatActivity{
 
         // Set up SharedPreference storage
         emptySet.add("7");
+        Log.d(TAG, "onCreate: " + Arrays.asList(emptySet));
         sharedPref = this.getPreferences(Context.MODE_PRIVATE);
         collection = new Collection();
         summon = new Summon(this);
 
 
+/*
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putStringSet(getString(R.string.collection_key),emptySet);
+        editor.commit();
+*/
+
         int[] bufferSet = collection.convertSetToArray(sharedPref.getStringSet(getString(R.string.collection_key), emptySet));
+        //In case zero appears in collection
+
         int bufferCoin = sharedPref.getInt(getString(R.string.coin_key), 0);
         Log.d(TAG, "onCreate Set: " + bufferSet[0]);
         collection.setCoin(bufferCoin);
