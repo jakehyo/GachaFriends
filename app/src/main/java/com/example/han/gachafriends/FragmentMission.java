@@ -28,6 +28,7 @@ public class FragmentMission extends Fragment implements View.OnClickListener{
     private static final String ARG_PARAM2 = "param2";
     public static final String TAG = "TAGG";
     public  TextView actionText;
+    public  TextView playerText;
     public int action;
     public int player;
     private ArrayList<String> actions;
@@ -102,6 +103,11 @@ public class FragmentMission extends Fragment implements View.OnClickListener{
             leftButton = view.findViewById(R.id.buttonLeft);
             rightButton = view.findViewById(R.id.buttonRight);
             actionText = view.findViewById(R.id.textViewAction);
+            playerText = view.findViewById(R.id.textView2);
+            upButton.setEnabled(false);
+            downButton.setEnabled(false);
+            leftButton.setEnabled(false);
+            rightButton.setEnabled(false);
             setOnClickListeners();
             createActions();
         }
@@ -166,14 +172,14 @@ public class FragmentMission extends Fragment implements View.OnClickListener{
     }
  private void createActions() {
         actions = new ArrayList<String>();
-        actions.add("Cerelean strikes right.");
-        actions.add("Cerelean strikes left.");
-        actions.add("Cerelean strikes above.");
-        actions.add("Cerelean strikes below.");
-        actions.add("Cerelean strikes right.");
-        actions.add("Cerelean strikes left.");
-        actions.add("Cerelean strikes up.");
-        actions.add("Cerelean strikes down.");
+        actions.add("Cerulean strikes right.");
+        actions.add("Cerulean strikes left.");
+        actions.add("Cerulean strikes above.");
+        actions.add("Cerulean strikes below.");
+        actions.add("Cerulean dodges right.");
+        actions.add("Cerulean dodges left.");
+        actions.add("Cerulean dodges up.");
+        actions.add("Cerulean dodges down.");
  }
     @Override
     public void onClick(View view) {
@@ -181,19 +187,40 @@ public class FragmentMission extends Fragment implements View.OnClickListener{
         switch (view.getId()) {
              case R.id.buttonM1:
                  actionText.setVisibility(View.VISIBLE);
+                 playerText.setVisibility(View.VISIBLE);
                  actionText.setText(actions.get((int) (Math.random()*7)));
                  action = actions.indexOf(actionText.getText().toString());
                  m1Button.setEnabled(false);
-                 if(action == 0 || action == 4) {
+                 upButton.setEnabled(true);
+                 downButton.setEnabled(true);
+                 leftButton.setEnabled(true);
+                 rightButton.setEnabled(true);
+                 if(action == 0 || action == 5) {
+                     if(action == 0)
+                         playerText.setText("Dodge!");
+                     else
+                         playerText.setText("Attack!");
                      action = 1;
                  }
-                else if(action == 1 || action == 5) {
+                else if(action == 1 || action == 4) {
+                     if(action == 1)
+                         playerText.setText("Dodge!");
+                     else
+                         playerText.setText("Attack!");
                      action = 2;
                  }
-                 else if(action == 2 || action == 6) {
+                 else if(action == 2 || action == 7) {
+                     if(action == 2)
+                         playerText.setText("Dodge!");
+                     else
+                         playerText.setText("Attack!");
                      action = 3;
                  }
-                 else if(action == 3 || action == 7) {
+                 else if(action == 3 || action == 6) {
+                     if(action == 3)
+                         playerText.setText("Dodge!");
+                     else
+                         playerText.setText("Attack!");
                      action = 4;
                  }
             break;
@@ -215,55 +242,91 @@ public class FragmentMission extends Fragment implements View.OnClickListener{
              //break;
             case R.id.buttonRight:
                player = 2;
+                playerText.setVisibility(View.INVISIBLE);
                 if(action == player) {
                     collection.addCoin(1);
                     collection.updateCoin();
                     action = 0;
                     m1Button.setEnabled(true);
+                    upButton.setEnabled(false);
+                    downButton.setEnabled(false);
+                    leftButton.setEnabled(false);
+                    rightButton.setEnabled(false);
                     actionText.setText("Mission Success");
                 }
                     else{actionText.setText("Mission Fail");
                     m1Button.setEnabled(true);
+                    upButton.setEnabled(false);
+                    downButton.setEnabled(false);
+                    leftButton.setEnabled(false);
+                    rightButton.setEnabled(false);
                     }
 
                break;
             case R.id.buttonLeft:
             player = 1;
+                playerText.setVisibility(View.INVISIBLE);
                 if(action == player) {
                     collection.addCoin(1);
                     collection.updateCoin();
                     action = 0;
                     m1Button.setEnabled(true);
+                    upButton.setEnabled(false);
+                    downButton.setEnabled(false);
+                    leftButton.setEnabled(false);
+                    rightButton.setEnabled(false);
                     actionText.setText("Mission Success");
                 }
                 else{actionText.setText("Mission Fail");
                     m1Button.setEnabled(true);
+                    upButton.setEnabled(false);
+                    downButton.setEnabled(false);
+                    leftButton.setEnabled(false);
+                    rightButton.setEnabled(false);
                 }
             break;
             case R.id.buttonUp:
                 player = 4;
+                playerText.setVisibility(View.INVISIBLE);
                 if(action == player) {
                     collection.addCoin(1);
                     collection.updateCoin();
                     action = 0;
                     m1Button.setEnabled(true);
+                    upButton.setEnabled(false);
+                    downButton.setEnabled(false);
+                    leftButton.setEnabled(false);
+                    rightButton.setEnabled(false);
                     actionText.setText("Mission Success");
                 }
                 else{actionText.setText("Mission Fail");
                     m1Button.setEnabled(true);
+                    upButton.setEnabled(false);
+                    downButton.setEnabled(false);
+                    leftButton.setEnabled(false);
+                    rightButton.setEnabled(false);
                 }
                 break;
             case R.id.buttonDown:
                 player = 3;
+                playerText.setVisibility(View.INVISIBLE);
                 if(action == player) {
                     collection.addCoin(1);
                     collection.updateCoin();
                     action = 0;
                     m1Button.setEnabled(true);
+                    upButton.setEnabled(false);
+                    downButton.setEnabled(false);
+                    leftButton.setEnabled(false);
+                    rightButton.setEnabled(false);
                     actionText.setText("Mission Success");
                 }
                 else{actionText.setText("Mission Fail");
                     m1Button.setEnabled(true);
+                    upButton.setEnabled(false);
+                    downButton.setEnabled(false);
+                    leftButton.setEnabled(false);
+                    rightButton.setEnabled(false);
                 }
                 break;
              }

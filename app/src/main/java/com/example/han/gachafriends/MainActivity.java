@@ -58,11 +58,9 @@ public class MainActivity extends AppCompatActivity{
         summon = new Summon(this);
 
 
-/*
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putStringSet(getString(R.string.collection_key),emptySet);
-        editor.commit();
-*/
+
+
+
 
         int[] bufferSet = collection.convertSetToArray(sharedPref.getStringSet(getString(R.string.collection_key), emptySet));
         //In case zero appears in collection
