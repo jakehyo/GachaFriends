@@ -162,7 +162,7 @@ public class FragmentSummon extends Fragment implements View.OnClickListener{
        else if(collection.getCoin() <= 5) {
 
         }
-        //bleh
+
         }
 
 
