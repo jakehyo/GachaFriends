@@ -68,6 +68,7 @@ public class Friend {
         return name;
     }
 
+
     public int getImageId(){
         String nameWithUnderscores = "";
         for(int i = 0; i < name.length(); i++){

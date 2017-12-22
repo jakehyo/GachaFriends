@@ -56,10 +56,9 @@ public class MainActivity extends AppCompatActivity{
         collection = new Collection();
         summon = new Summon(this);
 
-
-
-
-
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putStringSet(getString(R.string.collection_key),emptySet);
+        editor.commit();
 
         int[] bufferSet = collection.convertSetToArray(sharedPref.getStringSet(getString(R.string.collection_key), emptySet));
         //In case zero appears in collection
@@ -84,6 +83,8 @@ public class MainActivity extends AppCompatActivity{
         bundle.putParcelable(getString(R.string.summon),summon);
         fragmentHome.setArguments(bundle);
         previousFragment = fragmentHome;
+
+
 
         android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
         fm.beginTransaction().replace(R.id.fragment_container, fragmentHome).commit();
@@ -197,7 +198,5 @@ public class MainActivity extends AppCompatActivity{
 
         super.onResume();
     }
-
     //override onPause to save to sharedpreferences whatever is in the collection
-
 }

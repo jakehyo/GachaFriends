@@ -75,6 +75,7 @@ public class FragmentCollection extends Fragment implements View.OnClickListener
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        collection = new Collection();
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -82,7 +83,7 @@ public class FragmentCollection extends Fragment implements View.OnClickListener
 
             Bundle bundle = getArguments();
             if(bundle != null) {
-                collection =  bundle.getParcelable(getString(R.string.collection));
+                //collection =  bundle.getParcelable(getString(R.string.collection));
                 summon =  bundle.getParcelable(getString(R.string.summon));
                 summon.setContext(getActivity());
                 summon.setupText();
@@ -97,22 +98,10 @@ public class FragmentCollection extends Fragment implements View.OnClickListener
            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Friend tappedFriend = collection.getFriend(i, getContext());
                 Log.d(MainActivity.TAG, "onItemClick: " + tappedFriend.getName());
-                createPopup(tappedFriend);
            }
        });
     }
 
-    private void createPopup(Friend friend) {
-        friendImage.setImageDrawable(getResources().getDrawable(friend.getImageId()));
-        friendName.setText(friend.getName());
-        LinearLayout popupLayout = new LinearLayout(getContext());
-        popupLayout.setOrientation(LinearLayout.VERTICAL);
-        popupLayout.addView(close);
-        popupLayout.addView(friendName);
-        popupLayout.addView(friendImage);
-        window = new PopupWindow(popupLayout, ActionBar.LayoutParams.FILL_PARENT, ActionBar.LayoutParams.WRAP_CONTENT);
-        window.setContentView(popupLayout);
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -127,15 +116,14 @@ public class FragmentCollection extends Fragment implements View.OnClickListener
         gridView = getView().findViewById(R.id.collection_view);
 
         setupGridView();
-        setupPopup();
 
         gridView.setAdapter(new ArrayAdapter<Friend>(getContext(), android.R.layout.simple_list_item_1, collection.getFriendList(getContext())){
            @Override
            public View getView(int position, View convertView, ViewGroup parent) {
                TextView textView = (TextView) super.getView(position, convertView, parent);
                textView.setGravity(Gravity.CENTER);
-               Log.d(TAG, "getView: " + collection.getFriendList(getContext()).size());
                textView.setCompoundDrawablesWithIntrinsicBounds(null, getResources().getDrawable(collection.getFriendList(getContext()).get(position).getFrameId()), null, null);
+               Log.d(MainActivity.TAG, "getView: " + collection.getFriendList(getContext()).get(position).getId());
                return textView;
            }
         });
