@@ -75,7 +75,6 @@ public class FragmentCollection extends Fragment implements View.OnClickListener
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        collection = new Collection();
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -83,7 +82,7 @@ public class FragmentCollection extends Fragment implements View.OnClickListener
 
             Bundle bundle = getArguments();
             if(bundle != null) {
-                //collection =  bundle.getParcelable(getString(R.string.collection));
+                collection =  bundle.getParcelable(getString(R.string.collection));
                 summon =  bundle.getParcelable(getString(R.string.summon));
                 summon.setContext(getActivity());
                 summon.setupText();
@@ -98,6 +97,7 @@ public class FragmentCollection extends Fragment implements View.OnClickListener
            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Friend tappedFriend = collection.getFriend(i, getContext());
                 Log.d(MainActivity.TAG, "onItemClick: " + tappedFriend.getName());
+
            }
        });
     }

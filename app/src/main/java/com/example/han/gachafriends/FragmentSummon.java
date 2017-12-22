@@ -159,10 +159,6 @@ public class FragmentSummon extends Fragment implements View.OnClickListener{
             collection.updateCoin();
             Log.d(TAG, "onClickSummon: " + collection.toString());
         }
-       else if(collection.getCoin() <= 5) {
-
-        }
-        //bleh
         }
 
 

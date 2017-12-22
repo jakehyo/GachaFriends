@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity{
     private Bundle bundle;
 
     private Set<String> emptySet = new HashSet<String>();
-    private boolean ranConstructor;
     private SharedPreferences sharedPref;
 
     public Fragment fragmentHome;
@@ -56,9 +55,10 @@ public class MainActivity extends AppCompatActivity{
         collection = new Collection();
         summon = new Summon(this);
 
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putStringSet(getString(R.string.collection_key),emptySet);
-        editor.commit();
+
+
+
+
 
         int[] bufferSet = collection.convertSetToArray(sharedPref.getStringSet(getString(R.string.collection_key), emptySet));
         //In case zero appears in collection
@@ -68,8 +68,6 @@ public class MainActivity extends AppCompatActivity{
         collection.setCoin(bufferCoin);
         collection.setCollection(bufferSet);
 
-
-        ranConstructor = true;
 
         coinText.setText("Coins: " + collection.getCoin());
 
@@ -105,8 +103,10 @@ public class MainActivity extends AppCompatActivity{
                     collection = bundle.getParcelable(getString(R.string.collection));
                     summon = bundle.getParcelable(getString(R.string.summon));
 
-                    bundle.putParcelable(getString(R.string.collection), collection);
-                    bundle.putParcelable(getString(R.string.summon), summon);
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putStringSet(getString(R.string.collection_key),collection.convertArrayToSet(collection.getCollection()));
+                    editor.putInt(getString(R.string.coin_key),collection.getCoin());
+                    editor.commit();
 
                     fragmentHome.setArguments(bundle);
                     currentFragment = fragmentHome;
@@ -117,8 +117,10 @@ public class MainActivity extends AppCompatActivity{
                     collection = bundle.getParcelable(getString(R.string.collection));
                     summon = bundle.getParcelable(getString(R.string.summon));
 
-                    bundle.putParcelable(getString(R.string.collection), collection);
-                    bundle.putParcelable(getString(R.string.summon), summon);
+                    editor = sharedPref.edit();
+                    editor.putStringSet(getString(R.string.collection_key),collection.convertArrayToSet(collection.getCollection()));
+                    editor.putInt(getString(R.string.coin_key),collection.getCoin());
+                    editor.commit();
 
                     fragmentCollection.setArguments(bundle);
                     currentFragment = fragmentCollection;
@@ -129,8 +131,10 @@ public class MainActivity extends AppCompatActivity{
                     collection = bundle.getParcelable(getString(R.string.collection));
                     summon = bundle.getParcelable(getString(R.string.summon));
 
-                    bundle.putParcelable(getString(R.string.collection), collection);
-                    bundle.putParcelable(getString(R.string.summon), summon);
+                    editor = sharedPref.edit();
+                    editor.putStringSet(getString(R.string.collection_key),collection.convertArrayToSet(collection.getCollection()));
+                    editor.putInt(getString(R.string.coin_key),collection.getCoin());
+                    editor.commit();
 
                     fragmentSummon.setArguments(bundle);
                     currentFragment = fragmentSummon;
@@ -142,8 +146,10 @@ public class MainActivity extends AppCompatActivity{
                     collection = bundle.getParcelable(getString(R.string.collection));
                     summon = bundle.getParcelable(getString(R.string.summon));
 
-                    bundle.putParcelable(getString(R.string.collection), collection);
-                    bundle.putParcelable(getString(R.string.summon), summon);
+                    editor = sharedPref.edit();
+                    editor.putStringSet(getString(R.string.collection_key),collection.convertArrayToSet(collection.getCollection()));
+                    editor.putInt(getString(R.string.coin_key),collection.getCoin());
+                    editor.commit();
 
                     fragmentMission.setArguments(bundle);
                     currentFragment = fragmentMission;
@@ -183,18 +189,10 @@ public class MainActivity extends AppCompatActivity{
 
     @Override
     protected void onResume() {
-
-        if (ranConstructor)
-        {
-            ranConstructor = false;
-        }
-        if (!ranConstructor)
-        {
             Set<String> temp = sharedPref.getStringSet(getString(R.string.collection_key),emptySet);
             int[] buffer = collection.convertSetToArray(temp);
             collection.setCollection(buffer);
             collection.setCoin(sharedPref.getInt(getString(R.string.coin_key),0));
-        }
 
         super.onResume();
     }
