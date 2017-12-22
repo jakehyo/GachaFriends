@@ -50,7 +50,7 @@ public class Summon implements Parcelable {
     {
         Friend temp = new Friend(1, mContext);
         int total = temp.totalLines();
-        int friend = (int) (Math.random()*total + 1);
+        int friend = (int) (Math.random()*(total - 1) + 1);
         temp = new Friend(friend, mContext);
         Log.d(TAG, temp.getName());
         Toast.makeText(mContext,"GET", Toast.LENGTH_SHORT).show();

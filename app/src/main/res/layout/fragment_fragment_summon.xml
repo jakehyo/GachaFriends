@@ -7,6 +7,17 @@
     tools:context="com.example.han.gachafriends.FragmentSummon">
 
     <!-- TODO: Update blank fragment layout -->
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/summon_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
@@ -51,6 +62,10 @@
         android:layout_marginTop="32dp"
         android:gravity="center_horizontal"
         android:textColor="@android:color/black"
+        android:shadowColor="#00ff22"
+        android:shadowDy="7"
+        android:shadowDx="5"
+        android:shadowRadius="4"
         android:textSize="30sp"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -58,5 +73,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.00" />
+
+
 
 </android.support.constraint.ConstraintLayout>

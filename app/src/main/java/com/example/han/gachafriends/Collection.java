@@ -17,10 +17,11 @@ public class Collection implements Parcelable {
 
     private int[] collection;
     private int coin;
+    private int homeFriend;
 
     public Collection()
     {
-        this.collection = new int[]{1,4,7,39};
+        this.collection = new int[]{1};
     }
 
     public int[] convertSetToArray(Set<String> temp)
@@ -96,7 +97,13 @@ public class Collection implements Parcelable {
         this.coin = 0;
     }
 
+    public void setHomeFriend(int friendID){
+        homeFriend = friendID;
+    }
 
+    public int getHomeFriend(){
+        return homeFriend;
+    }
 
     public int[] getCollection() {
         return collection;

@@ -59,14 +59,14 @@ public class MainActivity extends AppCompatActivity{
 
 
 
-
-
         int[] bufferSet = collection.convertSetToArray(sharedPref.getStringSet(getString(R.string.collection_key), emptySet));
         //In case zero appears in collection
 
         int bufferCoin = sharedPref.getInt(getString(R.string.coin_key), 0);
+        int bufferFriend = sharedPref.getInt(getString(R.string.homeFriend), 100);
         Log.d(TAG, "onCreate Set: " + bufferSet[0]);
         collection.setCoin(bufferCoin);
+        collection.setHomeFriend(bufferFriend);
         collection.setCollection(bufferSet);
 
 
@@ -136,6 +136,8 @@ public class MainActivity extends AppCompatActivity{
         }
     };
 
+
+
     public Collection getCollection() {
         return collection;
     }
@@ -155,6 +157,7 @@ public class MainActivity extends AppCompatActivity{
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putStringSet(getString(R.string.collection_key),buffer);
         editor.putInt(getString(R.string.coin_key),collection.getCoin());
+        editor.putInt(getString(R.string.homeFriend),100);
         editor.commit();
 
         Log.d(TAG, "onPause: Coin=" + collection.getCoin());
@@ -169,7 +172,7 @@ public class MainActivity extends AppCompatActivity{
             int[] buffer = collection.convertSetToArray(temp);
             collection.setCollection(buffer);
             collection.setCoin(sharedPref.getInt(getString(R.string.coin_key),0));
-
+            collection.setHomeFriend(sharedPref.getInt(getString(R.string.homeFriend), 100));
         super.onResume();
     }
     //override onPause to save to sharedpreferences whatever is in the collection

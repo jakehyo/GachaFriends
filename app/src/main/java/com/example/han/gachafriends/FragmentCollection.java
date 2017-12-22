@@ -1,6 +1,7 @@
 package com.example.han.gachafriends;
 
 import android.app.ActionBar;
+import android.support.v4.app.DialogFragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -34,7 +35,7 @@ import static android.content.ContentValues.TAG;
  * Use the {@link FragmentCollection#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentCollection extends Fragment implements View.OnClickListener {
+public class FragmentCollection extends Fragment implements View.OnClickListener, com.example.han.gachafriends.PopupWindow.PopupWindowListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -55,20 +56,13 @@ public class FragmentCollection extends Fragment implements View.OnClickListener
     private ImageView friendImage;
     private TextView friendName;
     private PopupWindow window;
+    private android.support.v4.app.FragmentManager manager;
+
 
     public FragmentCollection() {
-        // Required empty public constructor
+
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentCollection.
-     */
-    // TODO: Rename and change types and number of parameters
     public static FragmentCollection newInstance(String param1, String param2) {
         FragmentCollection fragment = new FragmentCollection();
         Bundle args = new Bundle();
@@ -103,6 +97,10 @@ public class FragmentCollection extends Fragment implements View.OnClickListener
            @Override
            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Friend tappedFriend = collection.getFriend(i, getContext());
+               DialogFragment newFrag = (DialogFragment) com.example.han.gachafriends.PopupWindow.newInstance(tappedFriend.getId());
+               newFrag.setTargetFragment(FragmentCollection.this, 300);
+               newFrag.show(getFragmentManager(), "dialog");
+
                 Log.d(MainActivity.TAG, "onItemClick: " + tappedFriend.getName());
 
            }
@@ -121,7 +119,6 @@ public class FragmentCollection extends Fragment implements View.OnClickListener
     public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
         gridView = getView().findViewById(R.id.collection_view);
-
         setupGridView();
 
         gridView.setAdapter(new CustomAdapter(getContext(), R.layout.grid_image, friendArrayList));
@@ -134,23 +131,6 @@ public class FragmentCollection extends Fragment implements View.OnClickListener
         friendName = new TextView((getContext()));
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-                /*if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }*/
-    }
 
     @Override
     public void onDetach() {
@@ -167,6 +147,11 @@ public class FragmentCollection extends Fragment implements View.OnClickListener
         if(view.getId() == R.id.close_x){
             window.dismiss();
         }
+    }
+
+    @Override
+    public void onFinishPopup(int id) {
+        collection.setHomeFriend(id);
     }
 
     /**

@@ -1,6 +1,7 @@
 package com.example.han.gachafriends;
 
 import android.content.Context;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import static com.example.han.gachafriends.MainActivity.TAG;
 
@@ -31,6 +33,7 @@ public class FragmentHome extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private ImageView homeFriendImage;
 
     private OnFragmentInteractionListener mListener;
 
@@ -76,6 +79,13 @@ public class FragmentHome extends Fragment {
 
     }
 
+    private void setupHomeFriend() {
+        if(collection.getHomeFriend() != 100){
+            Friend homeFriend = new Friend(collection.getHomeFriend(), getContext());
+            homeFriendImage.setImageDrawable(getResources().getDrawable(homeFriend.getImageId()));
+        }
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -91,6 +101,12 @@ public class FragmentHome extends Fragment {
     }
 
     @Override
+    public void onViewCreated(View view, Bundle savedInstanceState){
+        super.onViewCreated(view, savedInstanceState);
+        homeFriendImage = getView().findViewById(R.id.homeFriendView);
+    }
+
+    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         /*if (context instanceof OnFragmentInteractionListener) {
@@ -99,6 +115,12 @@ public class FragmentHome extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }*/
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setupHomeFriend();
     }
 
     @Override
