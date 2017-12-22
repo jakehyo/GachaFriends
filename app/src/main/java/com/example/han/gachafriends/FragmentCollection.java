@@ -136,10 +136,6 @@ public class FragmentCollection extends Fragment implements View.OnClickListener
     public void onDetach() {
         super.onDetach();
         mListener = null;
-        Bundle bundle = new Bundle();
-        bundle.putParcelable(getString(R.string.collection),collection);
-        bundle.putParcelable(getString(R.string.summon),summon);
-        setArguments(bundle);
     }
 
     @Override
