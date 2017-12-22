@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity{
     public Fragment fragmentCollection;
     public Fragment fragmentSummon;
     public Fragment fragmentMission;
+    public Fragment currentFragment;
     public Fragment previousFragment;
 
     @Override
@@ -92,68 +93,39 @@ public class MainActivity extends AppCompatActivity{
         coinText = findViewById(R.id.textView);
 
     }
+    private void switchFragments(Fragment fragment)
+    {
+        bundle = previousFragment.getArguments();
+        collection = bundle.getParcelable(getString(R.string.collection));
+        summon = bundle.getParcelable(getString(R.string.summon));
+
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putStringSet(getString(R.string.collection_key),collection.convertArrayToSet(collection.getCollection()));
+        editor.putInt(getString(R.string.coin_key),collection.getCoin());
+        editor.commit();
+
+        fragment.setArguments(bundle);
+        currentFragment = fragment;
+        previousFragment = fragment;
+    }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            Fragment currentFragment = null;
+            currentFragment = null;
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    bundle = previousFragment.getArguments();
-                    collection = bundle.getParcelable(getString(R.string.collection));
-                    summon = bundle.getParcelable(getString(R.string.summon));
-
-                    SharedPreferences.Editor editor = sharedPref.edit();
-                    editor.putStringSet(getString(R.string.collection_key),collection.convertArrayToSet(collection.getCollection()));
-                    editor.putInt(getString(R.string.coin_key),collection.getCoin());
-                    editor.commit();
-
-                    fragmentHome.setArguments(bundle);
-                    currentFragment = fragmentHome;
-                    previousFragment = fragmentHome;
+                    switchFragments(fragmentHome);
                     break;
                 case R.id.navigation_collection:
-                    bundle = previousFragment.getArguments();
-                    collection = bundle.getParcelable(getString(R.string.collection));
-                    summon = bundle.getParcelable(getString(R.string.summon));
-
-                    editor = sharedPref.edit();
-                    editor.putStringSet(getString(R.string.collection_key),collection.convertArrayToSet(collection.getCollection()));
-                    editor.putInt(getString(R.string.coin_key),collection.getCoin());
-                    editor.commit();
-
-                    fragmentCollection.setArguments(bundle);
-                    currentFragment = fragmentCollection;
-                    previousFragment = fragmentCollection;
+                    switchFragments(fragmentCollection);
                     break;
                 case R.id.navigation_summon:
-                    bundle = previousFragment.getArguments();
-                    collection = bundle.getParcelable(getString(R.string.collection));
-                    summon = bundle.getParcelable(getString(R.string.summon));
-
-                    editor = sharedPref.edit();
-                    editor.putStringSet(getString(R.string.collection_key),collection.convertArrayToSet(collection.getCollection()));
-                    editor.putInt(getString(R.string.coin_key),collection.getCoin());
-                    editor.commit();
-
-                    fragmentSummon.setArguments(bundle);
-                    currentFragment = fragmentSummon;
-                    previousFragment = fragmentSummon;
+                    switchFragments(fragmentSummon);
 
                     break;
                 case R.id.navigation_mission:
-                    bundle = previousFragment.getArguments();
-                    collection = bundle.getParcelable(getString(R.string.collection));
-                    summon = bundle.getParcelable(getString(R.string.summon));
-
-                    editor = sharedPref.edit();
-                    editor.putStringSet(getString(R.string.collection_key),collection.convertArrayToSet(collection.getCollection()));
-                    editor.putInt(getString(R.string.coin_key),collection.getCoin());
-                    editor.commit();
-
-                    fragmentMission.setArguments(bundle);
-                    currentFragment = fragmentMission;
-                    previousFragment = fragmentMission;
+                    switchFragments(fragmentMission);
                     break;
             }
             FragmentManager fm = getSupportFragmentManager();
@@ -174,6 +146,10 @@ public class MainActivity extends AppCompatActivity{
 
     @Override
     protected void onPause() {
+        bundle = currentFragment.getArguments();
+        collection = bundle.getParcelable(getString(R.string.collection));
+        summon = bundle.getParcelable(getString(R.string.summon));
+
         int[] temp = collection.getCollection();
         Set<String> buffer = collection.convertArrayToSet(temp);
         SharedPreferences.Editor editor = sharedPref.edit();
