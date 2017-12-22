@@ -19,7 +19,6 @@ import java.util.Set;
 //lol
 public class MainActivity extends AppCompatActivity{
 
-    private ImageButton homeImageButton,missionImageButton,summonImageButton,collectionImageButton;
     public static TextView coinText;
     private static int coin = 5;
     public static final String TAG = "TIM_DEBUG";
