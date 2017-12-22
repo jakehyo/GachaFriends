@@ -5,6 +5,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -18,6 +19,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 import static android.content.ContentValues.TAG;
 
 
@@ -44,6 +49,7 @@ public class FragmentCollection extends Fragment implements View.OnClickListener
     private GridView gridView;
     private ArrayAdapter<Friend> friendArrayAdapter;
     private Collection collection;
+    private ArrayList<Friend> friendArrayList;
     private Summon summon;
     private ImageButton close;
     private ImageView friendImage;
@@ -87,6 +93,7 @@ public class FragmentCollection extends Fragment implements View.OnClickListener
                 summon.setContext(getActivity());
                 summon.setupText();
             }
+        friendArrayList = collection.getFriendList(getContext());
     }
 
     private void setupGridView() {
@@ -117,16 +124,7 @@ public class FragmentCollection extends Fragment implements View.OnClickListener
 
         setupGridView();
 
-        gridView.setAdapter(new ArrayAdapter<Friend>(getContext(), android.R.layout.simple_list_item_1, collection.getFriendList(getContext())){
-           @Override
-           public View getView(int position, View convertView, ViewGroup parent) {
-               TextView textView = (TextView) super.getView(position, convertView, parent);
-               textView.setGravity(Gravity.CENTER);
-               textView.setCompoundDrawablesWithIntrinsicBounds(null, getResources().getDrawable(collection.getFriendList(getContext()).get(position).getFrameId()), null, null);
-               Log.d(MainActivity.TAG, "getView: " + collection.getFriendList(getContext()).get(position).getId());
-               return textView;
-           }
-        });
+        gridView.setAdapter(new CustomAdapter(getContext(), R.layout.grid_image, friendArrayList));
     }
 
     private void setupPopup() {

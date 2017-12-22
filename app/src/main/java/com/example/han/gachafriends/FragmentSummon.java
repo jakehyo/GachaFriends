@@ -135,7 +135,7 @@ public class FragmentSummon extends Fragment implements View.OnClickListener{
             Drawable tempImageDrawable = getResources().getDrawable(tempFriend.getImageId());
             Bitmap bitmap = ((BitmapDrawable) tempImageDrawable).getBitmap();
 
-            /*int drawableHeight = tempImageDrawable.getIntrinsicHeight();
+            int drawableHeight = tempImageDrawable.getIntrinsicHeight();
             int drawableWidth = tempImageDrawable.getIntrinsicWidth();
 
             int scaledWidth = FRIEND_IMAGE_HEIGHT * drawableWidth / drawableHeight;
@@ -144,7 +144,7 @@ public class FragmentSummon extends Fragment implements View.OnClickListener{
             Drawable imageScaled = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap, scaledWidth, scaledHeight , true));
             image.setMaxHeight(scaledHeight);
             image.setMaxWidth(scaledWidth);
-*/
+
             image.setImageResource(tempFriend.getImageId());
             name.setText(summon.getName());
             collection.addFriend(tempFriend.getId());
@@ -159,6 +159,10 @@ public class FragmentSummon extends Fragment implements View.OnClickListener{
             collection.updateCoin();
             Log.d(TAG, "onClickSummon: " + collection.toString());
         }
+       else if(collection.getCoin() <= 5) {
+
+        }
+
         }
 
 
