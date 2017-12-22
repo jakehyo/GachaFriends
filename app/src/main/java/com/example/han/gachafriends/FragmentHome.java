@@ -69,6 +69,8 @@ public class FragmentHome extends Fragment {
         if(bundle != null) {
             collection = (Collection) bundle.getParcelable(getString(R.string.collection));
             summon =  (Summon) bundle.getParcelable(getString(R.string.summon));
+            summon.setContext(getActivity());
+            summon.setupText();
         }
         Log.d(TAG, "onCreateFrag: " + (collection.getCoin()));
 

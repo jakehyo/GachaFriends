@@ -79,6 +79,8 @@ public class FragmentSummon extends Fragment implements View.OnClickListener{
         if(bundle != null) {
             collection =  bundle.getParcelable(getString(R.string.collection));
             summon =  bundle.getParcelable(getString(R.string.summon));
+            summon.setContext(getActivity());
+            summon.setupText();
         }
     }
 

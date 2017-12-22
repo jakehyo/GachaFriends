@@ -104,6 +104,10 @@ public class MainActivity extends AppCompatActivity{
                     bundle = previousFragment.getArguments();
                     collection = bundle.getParcelable(getString(R.string.collection));
                     summon = bundle.getParcelable(getString(R.string.summon));
+
+                    bundle.putParcelable(getString(R.string.collection), collection);
+                    bundle.putParcelable(getString(R.string.summon), summon);
+
                     fragmentHome.setArguments(bundle);
                     currentFragment = fragmentHome;
                     previousFragment = fragmentHome;
@@ -112,6 +116,10 @@ public class MainActivity extends AppCompatActivity{
                     bundle = previousFragment.getArguments();
                     collection = bundle.getParcelable(getString(R.string.collection));
                     summon = bundle.getParcelable(getString(R.string.summon));
+
+                    bundle.putParcelable(getString(R.string.collection), collection);
+                    bundle.putParcelable(getString(R.string.summon), summon);
+
                     fragmentCollection.setArguments(bundle);
                     currentFragment = fragmentCollection;
                     previousFragment = fragmentCollection;
@@ -120,6 +128,10 @@ public class MainActivity extends AppCompatActivity{
                     bundle = previousFragment.getArguments();
                     collection = bundle.getParcelable(getString(R.string.collection));
                     summon = bundle.getParcelable(getString(R.string.summon));
+
+                    bundle.putParcelable(getString(R.string.collection), collection);
+                    bundle.putParcelable(getString(R.string.summon), summon);
+
                     fragmentSummon.setArguments(bundle);
                     currentFragment = fragmentSummon;
                     previousFragment = fragmentSummon;
@@ -129,6 +141,10 @@ public class MainActivity extends AppCompatActivity{
                     bundle = previousFragment.getArguments();
                     collection = bundle.getParcelable(getString(R.string.collection));
                     summon = bundle.getParcelable(getString(R.string.summon));
+
+                    bundle.putParcelable(getString(R.string.collection), collection);
+                    bundle.putParcelable(getString(R.string.summon), summon);
+
                     fragmentMission.setArguments(bundle);
                     currentFragment = fragmentMission;
                     previousFragment = fragmentMission;

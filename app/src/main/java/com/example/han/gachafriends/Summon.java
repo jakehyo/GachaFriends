@@ -1,6 +1,7 @@
 package com.example.han.gachafriends;
 
 import android.content.Context;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -28,7 +29,7 @@ public class Summon implements Parcelable {
         setupText();
     }
 
-    private void setupText() {
+    public void setupText() {
         nameReader = new BufferedReader(new InputStreamReader(mContext.getResources().openRawResource(R.raw.names)));
     }
 
@@ -80,9 +81,9 @@ public class Summon implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(mContext);
+        //dest.writeValue(mContext);
         // Causes crash whenever Activity closes or pauses.
-        dest.writeValue(nameReader);
+        //dest.writeValue(nameReader);
         dest.writeValue(image);
     }
 
@@ -98,4 +99,8 @@ public class Summon implements Parcelable {
             return new Summon[size];
         }
     };
+
+    public void setContext(FragmentActivity context) {
+        this.mContext = context;
+    }
 }
