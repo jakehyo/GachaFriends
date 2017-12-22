@@ -39,6 +39,8 @@ public class FragmentMission extends Fragment implements View.OnClickListener{
     private Collection collection;
     private Summon summon;
 
+    private static final int REWARD_COINS = 2000000;
+
     private Button m1Button, m2Button, m3Button, upButton, downButton, rightButton, leftButton;
     private OnFragmentInteractionListener mListener;
 
@@ -246,7 +248,7 @@ public class FragmentMission extends Fragment implements View.OnClickListener{
                player = 2;
                 playerText.setVisibility(View.INVISIBLE);
                 if(action == player) {
-                    collection.addCoin(1);
+                    collection.addCoin(REWARD_COINS);
                     collection.updateCoin();
                     action = 0;
                     m1Button.setEnabled(true);
@@ -269,7 +271,7 @@ public class FragmentMission extends Fragment implements View.OnClickListener{
             player = 1;
                 playerText.setVisibility(View.INVISIBLE);
                 if(action == player) {
-                    collection.addCoin(1);
+                    collection.addCoin(REWARD_COINS);
                     collection.updateCoin();
                     action = 0;
                     m1Button.setEnabled(true);
@@ -291,7 +293,7 @@ public class FragmentMission extends Fragment implements View.OnClickListener{
                 player = 4;
                 playerText.setVisibility(View.INVISIBLE);
                 if(action == player) {
-                    collection.addCoin(1);
+                    collection.addCoin(REWARD_COINS);
                     collection.updateCoin();
                     action = 0;
                     m1Button.setEnabled(true);
@@ -313,7 +315,7 @@ public class FragmentMission extends Fragment implements View.OnClickListener{
                 player = 3;
                 playerText.setVisibility(View.INVISIBLE);
                 if(action == player) {
-                    collection.addCoin(1);
+                    collection.addCoin(REWARD_COINS);
                     collection.updateCoin();
                     action = 0;
                     m1Button.setEnabled(true);
